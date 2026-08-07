@@ -11,6 +11,12 @@ o.scrolloff = 16               -- keep cursor away from the screen edge
 o.undofile = true              -- persistent undo across sessions
 o.mouse = ''                   -- no mouse in nvim; also lets Herdr keep host mouse capture off so Escape isn't swallowed
 
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank({ timeout = 200 })
+  end,
+})
+
 vim.api.nvim_create_user_command('Nonu', function()
   vim.opt_local.number = false
   vim.opt_local.relativenumber = false
