@@ -15,9 +15,9 @@ Running the switch builds:
 
 - System settings (dark mode, key repeat, dock, Finder, trackpad)
 - Homebrew apps (casks and CLI tools)
-- Nix user packages (ripgrep, fd, fzf, jq, lazygit, Neovim, Hack Nerd Font)
+- Nix user packages (Git, GitHub CLI, Delta, Neovim, eza, zoxide, tmux, ripgrep, fd, fzf, jq, Hack Nerd Font)
 - Shell (zsh, aliases, starship prompt)
-- Editor (Neovim config with the rose-pine moon theme)
+- Editor (Neovim config with the Nord theme)
 - Optional Pi theme and local extensions, generic UI settings and model overrides, plus tracked or pinned third-party Pi packages
 
 ## Prerequisites
@@ -87,9 +87,8 @@ If you clone it, review these before you run `bootstrap.sh`:
   All three have to match.
 - **CPU architecture**, `hostPlatform` in `configuration.nix` (see Prerequisites above).
 
-**Git identity:** this config deliberately does not set your git name or email.
-Git will stop your first commit and tell you to set them (`git config --global user.name "Your Name"` and `git config --global user.email you@example.com`).
-If you'd rather manage that declaratively, add this back to `home.nix` with your own identity:
+**Git identity:** `home.nix` contains my public GitHub name and noreply address.
+Replace them with your own before making commits:
 
 ```nix
 programs.git = {
@@ -164,7 +163,19 @@ Home Manager deliberately does not manage `~/.pi/agent` itself, or Pi authentica
 
 The first time you launch `nvim`, it bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) by cloning plugins from GitHub.
 That needs network access once; after that it's offline.
-Neovim uses the rose-pine moon theme, keeps italics off, and uses a transparent background on macOS, Windows, and WSL.
+Neovim uses the Nord theme and a transparent background.
+
+### Clipboard image hotkey
+
+One local hotkey helper pastes a clipboard image into a remote Pi session:
+
+1. `pngpaste` writes the clipboard image to a temporary PNG.
+2. SSH uploads it to a private remote image directory.
+3. The returned remote path replaces the local clipboard.
+4. Ghostty is focused and the path is pasted into the active session.
+
+Only `pngpaste`, the public dependency, is declared here. The app bundle, destination,
+SSH alias or address, logs, and Accessibility permission stay local.
 
 ## License
 

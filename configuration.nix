@@ -36,16 +36,29 @@
     onActivation.extraFlags = [ "--force" ];
     brews = [
       "herdr"
+      "pngpaste"
     ];
     casks = [
       "1password"
       "1password-cli"
+      "betterdisplay"
+      "codexbar"
       "ghostty"
+      "google-chrome"
+      "hapigo"
       "keka"
+      "karabiner-elements"
+      "logi-options+"
       "mos"
+      "notion"
       "pearcleaner"
+      "snipaste"
       "sublime-text"
+      "tencent-meeting"
+      "updf"
+      "uuremote"
       "visual-studio-code"
+      "wechat"
     ];
     masApps = {
       Bob = 1630034110;
