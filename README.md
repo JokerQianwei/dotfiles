@@ -2,6 +2,11 @@
 
 这是我的个人 Mac 配置，由 nix-darwin 和 Home Manager 管理。新 Mac 克隆仓库后，运行一个命令即可复现同一套环境。
 
+## 来源与参考
+
+本项目搭建时参考了 Kun 的 [kunchenguid/dotfiles](https://github.com/kunchenguid/dotfiles)。
+当前仓库不是 Fork，后续配置按我的设备和工作流独立维护。
+
 ## 使用与贡献
 
 这个仓库公开供阅读、参考和自由派生，但不接受功能请求或 Pull Request，PR 会被自动关闭。
