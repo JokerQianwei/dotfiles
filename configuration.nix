@@ -37,6 +37,8 @@
     brews = [
       "herdr"
     ];
-    casks = [ ];
+    casks = [
+      "ghostty"
+    ];
   };
 }
