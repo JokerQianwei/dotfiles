@@ -14,11 +14,9 @@ in
     delta
     neovim
     eza
-    zoxide
     tmux
     ripgrep
     fd
-    fzf
     jq
     # the font everything renders in
     nerd-fonts.hack
@@ -39,7 +37,27 @@ in
       push = "git push";
       pull = "git pull";
       m = "git switch main";
+      ls = "eza --icons=auto --group-directories-first";
+      ll = "eza -la --git --icons=auto --group-directories-first";
+      la = "eza -la --icons=auto --group-directories-first";
+      lt = "eza --tree --level=2 --icons=auto --group-directories-first";
     };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    fileWidgetCommand = "fd --type f --hidden --follow --exclude .git";
+    changeDirWidgetCommand = "fd --type d --hidden --follow --exclude .git";
+    changeDirWidgetOptions = [
+      "--preview 'eza --tree --level=2 --icons=auto --color=always {} 2>/dev/null | head -200'"
+    ];
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.starship = {
