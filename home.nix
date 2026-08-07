@@ -106,6 +106,8 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/config";
   home.file.".tmux.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
+  home.file."bin/pi-paste-image-safe2".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/pi-paste-image-safe2";
   # Keep Pi's credential and runtime state local by linking only authored files and directories.
   home.file.".pi/agent/extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/extensions";

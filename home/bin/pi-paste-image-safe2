@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+HOST="safe2"
+REMOTE_DIR=".cp-images"
+LOG="$HOME/Library/Logs/pi-paste-image-safe2.log"
+SSH_OPTS=(
+  -o BatchMode=yes
+  -o ControlMaster=auto
+  -o ControlPersist=24h
+  -o ControlPath="$HOME/.ssh/cm-%C"
+  -o LogLevel=ERROR
+)
+
+log() { printf '[%s] %s\n' "$(date '+%F %T')" "$*" >> "$LOG"; }
+fail() {
+  log "ERROR: $*"
+  osascript -e "display notification \"$*\" with title \"Paste image to safe2\"" >/dev/null 2>&1 || true
+  exit 1
+}
+
+command -v pngpaste >/dev/null 2>&1 || fail "缺少 pngpaste: brew install pngpaste"
+
+file="paste-$(date +%Y%m%d-%H%M%S)-$(uuidgen).png"
+tmpdir="$(mktemp -d "${TMPDIR:-/tmp}/pi-paste-image.XXXXXX")"
+local_file="$tmpdir/$file"
+trap 'rm -rf "$tmpdir"' EXIT
+
+pngpaste "$local_file" || fail "剪贴板里没有图片"
+[ -s "$local_file" ] || fail "剪贴板图片为空"
+
+# 远端目录和随机文件名有意在本机展开。
+# shellcheck disable=SC2029
+remote_path="$(ssh "${SSH_OPTS[@]}" "$HOST" "mkdir -p ~/$REMOTE_DIR && cat > ~/$REMOTE_DIR/$file && printf '%s' \"\$HOME/$REMOTE_DIR/$file\"" < "$local_file")" \
+  || fail "ssh 上传失败"
+[ -n "$remote_path" ] || fail "ssh 上传返回空路径"
+
+printf '%s' "$remote_path" | pbcopy
+
+osascript -e 'tell application "Ghostty" to activate' \
+          -e 'delay 0.05' \
+          -e 'tell application "System Events" to keystroke "v" using command down' \
+  || fail "无法把路径写入 Ghostty"
+
+log "OK: $remote_path"
