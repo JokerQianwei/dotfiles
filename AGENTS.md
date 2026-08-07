@@ -4,6 +4,7 @@
 
 - `configuration.nix` 中的 `homebrew.onActivation.cleanup = "zap"` 是有意设置。所有 Homebrew 软件都应在 Nix 配置中声明，以保证环境可复现。不要改成 `uninstall` 或 `none`；其影响已在 `README.md` 中说明。
 - 不要向这个公开仓库提交 `.no-mistakes/` 验证证据。该目录已被 Git 忽略；如果验证流程将其暂存到分支，合并前必须移除。
+- 除非用户明确要求，否则只在本地提交改动，不要执行 `git push`。
 
 ## 维护本文件
 

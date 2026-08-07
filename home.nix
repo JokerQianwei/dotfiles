@@ -100,8 +100,8 @@ in
   # Edit-in-place: the real file stays in my repo, ~/.config just points at it.
   home.file.".config/nvim".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
-  home.file.".config/herdr".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr";
+  home.file.".config/herdr/config.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
   home.file.".config/ghostty/config".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/config";
   home.file.".config/karabiner/karabiner.json".source =
@@ -114,12 +114,16 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Application Support/Sublime Text/Packages/User/Package Control.sublime-settings";
   home.file.".config/gh/config.yml".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/gh/config.yml";
+  home.file.".snipaste/config.ini".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.snipaste/config.ini";
   home.file.".tmux.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
   home.file."bin/pi-paste-image-safe2".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/pi-paste-image-safe2";
   home.file."bin/install-vscode-extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/install-vscode-extensions";
+  home.file."bin/restore-app-preferences".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/restore-app-preferences";
   # Keep Pi's credential and runtime state local by linking only authored files and directories.
   home.file.".pi/agent/extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/extensions";

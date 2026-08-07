@@ -135,6 +135,16 @@ VS Code 设置由 Home Manager 链接，扩展及固定版本记录在 `home/.co
 install-vscode-extensions
 ```
 
+### 恢复应用偏好
+
+Herdr 和 Snipaste 的配置由 Home Manager 分别链接到 `config.toml` 和 `config.ini`，日志、会话及截图历史仍留在本机。
+
+HapiGo 与 Bob 的完整偏好中混有账号、API Key、历史和插件数据，因此仓库只保存快捷键及普通界面行为。恢复这些安全设置：
+
+```sh
+restore-app-preferences
+```
+
 ## 可选的 Pi 配置
 
 Pi 是可选 CLI，本仓库不内置它。请按 [Pi 官方说明](https://pi.dev)安装，例如：

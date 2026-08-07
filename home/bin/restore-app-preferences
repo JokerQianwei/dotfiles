@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+killall HapiGo Bob >/dev/null 2>&1 || true
+
+hapigo="com.xunyong.hapigo"
+hapigo_commands="$HOME/.dotfiles/home/.config/hapigo/system-commands.json"
+[ -r "$hapigo_commands" ] || {
+  printf '无法读取 HapiGo 系统命令配置：%s\n' "$hapigo_commands" >&2
+  exit 1
+}
+
+defaults write "$hapigo" HaKey_aichat -data \
+  7b22636172626f6e4b6579436f6465223a39302c22636172626f6e4d6f64696669657273223a363931327d
+defaults write "$hapigo" HaKey_captureOCR -data \
+  7b22636172626f6e4d6f64696669657273223a323034382c22636172626f6e4b6579436f6465223a307d
+defaults write "$hapigo" HaKey_home_testing -data \
+  7b22636172626f6e4b6579436f6465223a39302c22636172626f6e4d6f64696669657273223a363931327d
+defaults write "$hapigo" com.hapigo.settings.appearance -int 0
+defaults write "$hapigo" com.hapigo.settings.subappearance -int 0
+defaults write "$hapigo" com.hapigo.disabledAbilities -array aichat translate ocr
+defaults write "$hapigo" com.hapigo.preferredFileViewer -string com.apple.finder
+commands_hex="$(jq -c . "$hapigo_commands" | tr -d '\n' | xxd -p | tr -d '\n')"
+defaults write "$hapigo" com.hapigo.systemCommands -data "$commands_hex"
+
+bob="com.hezongyidev.Bob"
+defaults write "$bob" Preference_autoCopyOCRResult -bool false
+defaults write "$bob" Preference_autoCopyTranslateResult -bool true
+defaults write "$bob" Preference_autoCopyWordWhenClicked -bool false
+defaults write "$bob" Preference_hiddenStatusIconV2 -bool true
+defaults write "$bob" Preference_hiddenSwitchLanguage -bool true
+defaults write "$bob" Preference_isPin -bool false
+defaults write "$bob" Preference_launchAtStartup -bool true
+defaults write "$bob" Preference_showSnipTranslateButton -bool false
+defaults write "$bob" Preference_showTranslateFavoriteButton -bool false
+
+printf 'HapiGo 和 Bob 的非敏感偏好已恢复，请重新打开应用。\n'
