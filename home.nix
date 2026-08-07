@@ -102,6 +102,8 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
   home.file.".config/herdr".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr";
+  home.file.".tmux.conf".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
   # Keep Pi's credential and runtime state local by linking only authored files and directories.
   home.file.".pi/agent/extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/extensions";
