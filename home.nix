@@ -60,6 +60,19 @@ in
 
   programs.git = {
     enable = true;
+    ignores = [
+      ".DS_Store"
+      ".AppleDouble"
+      ".LSOverride"
+      "*.swp"
+      "*.swo"
+      "*~"
+      ".env"
+      ".env.*"
+      "!.env.example"
+      "!.env.sample"
+      "!.env.1password.example"
+    ];
     settings = {
       user = {
         name = "JokerQianwei";
@@ -71,6 +84,7 @@ in
       merge.conflictStyle = "zdiff3";
       diff.colorMoved = "zebra";
       alias.df = "!git -c delta.side-by-side=true diff";
+      core.excludesFile = "~/.config/git/ignore";
     };
   };
 

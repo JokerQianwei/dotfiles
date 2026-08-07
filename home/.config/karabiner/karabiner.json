@@ -71,7 +71,7 @@
                         ]
                     },
                     {
-                        "description": "Ghostty Cmd+Opt+V: paste image to safe2",
+                        "description": "Ghostty Cmd+Opt+V / Cmd+Shift+V: paste image to safe2",
                         "manipulators": [
                             {
                                 "type": "basic",
@@ -81,6 +81,34 @@
                                         "mandatory": [
                                             "command",
                                             "option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "$HOME/bin/pi-paste-image-safe2 >/tmp/pi-paste-image-safe2-karabiner.out 2>/tmp/pi-paste-image-safe2-karabiner.err"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^com\\.mitchellh\\.ghostty$"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "shift"
                                         ],
                                         "optional": [
                                             "any"

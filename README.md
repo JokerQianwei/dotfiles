@@ -139,11 +139,13 @@ install-vscode-extensions
 
 Herdr 和 Snipaste 的配置由 Home Manager 分别链接到 `config.toml` 和 `config.ini`，日志、会话及截图历史仍留在本机。
 
-HapiGo 与 Bob 的完整偏好中混有账号、API Key、历史和插件数据，因此仓库只保存快捷键及普通界面行为。恢复这些安全设置：
+HapiGo 与 Bob 的完整偏好中混有账号、API Key、历史和插件数据，因此仓库只保存快捷键及普通界面行为。Mos 只保留滚动方向、平滑效果、速度、步长和状态栏行为，不保存设备缓存。恢复这些安全设置：
 
 ```sh
 restore-app-preferences
 ```
+
+全局 Git 忽略规则直接声明在 `home.nix`，包括 macOS 文件、编辑器临时文件和本地 `.env` 文件。
 
 ## 可选的 Pi 配置
 
@@ -188,14 +190,14 @@ Home Manager 不管理整个 `~/.pi/agent`，也不管理 Pi 认证、会话、�
 
 ### 剪贴板图片快捷键
 
-本机快捷键 App 会调用仓库中的 `home/bin/pi-paste-image-safe2`，将剪贴板图片粘贴到远程 Pi 会话：
+Karabiner 在 Ghostty 中接管 `Cmd+Option+V` 和 `Cmd+Shift+V`，调用仓库中的 `home/bin/pi-paste-image-safe2`，将剪贴板图片粘贴到远程 Pi 会话：
 
 1. `pngpaste` 将剪贴板图片写入临时 PNG。
 2. SSH 将图片上传到私有远程目录。
 3. 返回的远程路径写回本机剪贴板。
 4. Ghostty 获得焦点，并将路径粘贴到当前会话。
 
-脚本中只保存 SSH 别名 `safe2`，不包含真实主机名、IP、用户名、凭据或 SSH 配置；别名的实际连接信息仍只保存在本机。仓库同时声明公开依赖 `pngpaste`。负责全局快捷键的 App Bundle、运行日志和辅助功能权限不进入仓库。
+脚本中只保存 SSH 别名 `safe2`，不包含真实主机名、IP、用户名、凭据或 SSH 配置；别名的实际连接信息仍只保存在本机。仓库同时声明公开依赖 `pngpaste`，不再使用独立的 Hotkey App 或 LaunchAgent。
 
 ## 许可证
 

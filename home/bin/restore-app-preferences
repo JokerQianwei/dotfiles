@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-killall HapiGo Bob >/dev/null 2>&1 || true
+killall HapiGo Bob Mos >/dev/null 2>&1 || true
 
 hapigo="com.xunyong.hapigo"
 hapigo_commands="$HOME/.dotfiles/home/.config/hapigo/system-commands.json"
@@ -34,4 +34,27 @@ defaults write "$bob" Preference_launchAtStartup -bool true
 defaults write "$bob" Preference_showSnipTranslateButton -bool false
 defaults write "$bob" Preference_showTranslateFavoriteButton -bool false
 
-printf 'HapiGo 和 Bob 的非敏感偏好已恢复，请重新打开应用。\n'
+mos="com.caldis.Mos"
+defaults write "$mos" allowlist -bool false
+defaults write "$mos" block -data \
+  7b2274797065223a226b6579626f617264222c22636f6465223a35357d
+defaults write "$mos" dash -data \
+  7b2274797065223a226b6579626f617264222c22636f6465223a35387d
+defaults write "$mos" toggle -data \
+  7b2274797065223a226b6579626f617264222c22636f6465223a35367d
+defaults write "$mos" deadZone -int 1
+defaults write "$mos" duration -float 4.35
+defaults write "$mos" hideStatusItem -bool true
+defaults write "$mos" reverse -bool true
+defaults write "$mos" reverseHorizontal -bool true
+defaults write "$mos" reverseVertical -bool true
+defaults write "$mos" smooth -bool true
+defaults write "$mos" smoothHorizontal -bool true
+defaults write "$mos" smoothSimTrackpad -bool false
+defaults write "$mos" smoothVertical -bool true
+defaults write "$mos" speed -float 2.7
+defaults write "$mos" step -float 33.6
+defaults write "$mos" updateCheckOnAppStart -bool false
+defaults write "$mos" updateIncludingBetaVersion -bool false
+
+printf 'HapiGo、Bob 和 Mos 的非敏感偏好已恢复，请重新打开应用。\n'
