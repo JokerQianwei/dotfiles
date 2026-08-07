@@ -1,28 +1,23 @@
-# Contributing
+# 贡献说明
 
-Thanks for taking an interest in these dotfiles.
-This repo is public so you can read it, learn from it, and fork it freely, but it is JokerQianwei's personal setup and does not accept pull requests or feature requests.
-If you want to adapt something, please fork the repo and make it yours.
-If you found a bug, please open a bug report issue instead of sending a patch.
-Pull requests are auto-closed here so the repo can stay personal and predictable.
+这是 JokerQianwei 的个人配置仓库，公开供阅读、参考和自由派生，但不接受 Pull Request 或功能请求。
+需要调整时请 Fork 后维护自己的版本。发现问题时，请提交 Bug 报告 Issue，不要直接发送补丁。
+为了保持仓库用途单一且行为可预测，Pull Request 会被自动关闭。
 
-## Bugs
+## Bug 报告
 
-Bug reports are welcome through GitHub Issues only.
-Please use the bug report template and include:
+请使用 GitHub Issue 中的 Bug 报告模板，并提供：
 
-- What happened.
-- What you expected to happen.
-- Steps to reproduce the problem.
-- Your environment, including macOS, Linux, or WSL and any relevant Nix or home-manager generation details.
+- 实际发生了什么。
+- 预期行为是什么。
+- 最小复现步骤。
+- 运行环境，包括 macOS、Linux 或 WSL，以及相关的 Nix 或 Home Manager generation 信息。
 
-## Feature Ideas
+## 功能想法
 
-Feature requests are not accepted in this repo.
-If an idea would make these dotfiles better for you, please fork the repo and shape it around your own setup.
+本仓库不接受功能请求。如果某项改动更适合你的环境，请 Fork 后按自己的需求调整。
 
-## Pull Requests
+## Pull Request
 
-Please do not open pull requests against this repo.
-They are auto-closed, including bug-fix PRs.
-For bugs, open an issue with the bug report template so the problem can be understood in the context of this personal setup.
+请不要向本仓库提交 Pull Request，包括修复 Bug 的 PR；它们都会被自动关闭。
+如果发现问题，请使用 Bug 报告模板提交 Issue，以便结合这套个人配置的实际环境进行判断。

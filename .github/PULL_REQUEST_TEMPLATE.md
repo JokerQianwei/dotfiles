@@ -1,7 +1,6 @@
-# Thanks for the interest
+# 感谢关注
 
-Thanks for taking an interest in these dotfiles.
-This repo is public so you can read it, learn from it, and fork it freely, but it is Kun's personal setup and does not accept pull requests or feature requests.
-If you want to adapt something, please fork the repo and make it yours.
-If you found a bug, please open a bug report issue instead of sending a patch.
-Pull requests are auto-closed here so the repo can stay personal and predictable.
+这是 JokerQianwei 的个人配置仓库，公开供阅读、参考和自由派生，但不接受 Pull Request 或功能请求。
+需要调整时，请 Fork 后维护自己的版本。
+如果发现问题，请使用 Bug 报告模板提交 Issue，不要直接发送补丁。
+为了保持仓库用途单一且行为可预测，Pull Request 会被自动关闭。

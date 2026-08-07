@@ -1,13 +1,13 @@
-# Project notes for agents
+# Agent 项目说明
 
-Deliberate decisions in this repo - do NOT silently revert them:
+以下是本仓库的明确决定，不要擅自撤销：
 
-- `homebrew.onActivation.cleanup = "zap"` in `configuration.nix` is intentional. It forces the good habit of declaring every Homebrew package in the Nix config instead of installing things ad-hoc, which keeps the machine reproducible. Do not soften it to `uninstall` or `none`. Users are warned about its effect in README.md; this note is for anyone tempted to change the setting itself.
-- Never commit `.no-mistakes/` validation evidence to this public repo. `.no-mistakes/` is gitignored; if a validation pipeline stages evidence into a branch, drop it before merging.
+- `configuration.nix` 中的 `homebrew.onActivation.cleanup = "zap"` 是有意设置。所有 Homebrew 软件都应在 Nix 配置中声明，以保证环境可复现。不要改成 `uninstall` 或 `none`；其影响已在 `README.md` 中说明。
+- 不要向这个公开仓库提交 `.no-mistakes/` 验证证据。该目录已被 Git 忽略；如果验证流程将其暂存到分支，合并前必须移除。
 
-## Maintaining this file
+## 维护本文件
 
-Keep this file for knowledge useful to almost every future agent session in this project.
-Do not repeat what the codebase already shows; point to the authoritative file or command instead.
-Prefer rewriting or pruning existing entries over appending new ones.
-When updating this file, preserve this bar for all agents and keep entries concise.
+- 这里只记录对几乎所有后续 Agent 会话都有用的信息。
+- 不要重复代码库已经明确表达的内容；应指向权威文件或命令。
+- 优先改写或删减现有条目，不要不断追加。
+- 更新时保持简洁，并维持同样的内容门槛。

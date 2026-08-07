@@ -1,68 +1,68 @@
-name: Bug report
-description: Report a reproducible bug in these dotfiles.
-title: "[Bug]: "
+name: Bug 报告
+description: 报告这套 dotfiles 中可复现的问题。
+title: "[Bug] "
 labels:
   - bug
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve this personal dotfiles repo.
-        Bug reports are welcome here, but feature requests are not accepted.
-        If you want a different setup or feature, please fork the repo and make it yours.
+        感谢帮助改进这套个人 dotfiles。
+        这里接受 Bug 报告，但不接受功能请求。
+        如果需要不同的配置或功能，请 Fork 后维护自己的版本。
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: Describe the behavior you saw.
-      placeholder: Tell me what broke or behaved unexpectedly.
+      label: 实际发生了什么？
+      description: 请描述你观察到的行为。
+      placeholder: 说明哪里出错或出现了意外行为。
     validations:
       required: true
   - type: textarea
     id: expected-behavior
     attributes:
-      label: What did you expect to happen?
-      description: Describe the behavior you expected.
-      placeholder: Tell me what you expected instead.
+      label: 预期行为是什么？
+      description: 请描述你期望的行为。
+      placeholder: 说明你原本预期会发生什么。
     validations:
       required: true
   - type: textarea
     id: repro-steps
     attributes:
-      label: Reproduction steps
-      description: List the smallest set of steps that reproduces the bug.
+      label: 复现步骤
+      description: 列出能够复现问题的最少步骤。
       placeholder: |
-        1. Clone the repo.
-        2. Run ...
-        3. See ...
+        1. 克隆仓库。
+        2. 运行……
+        3. 观察到……
     validations:
       required: true
   - type: dropdown
     id: environment
     attributes:
-      label: Environment
-      description: Where did you see the bug?
+      label: 运行环境
+      description: 问题出现在哪种环境？
       multiple: true
       options:
         - macOS
         - Linux
         - WSL
-        - Other
+        - 其他
     validations:
       required: true
   - type: input
     id: nix-generation
     attributes:
-      label: Nix or home-manager generation
-      description: If relevant, include the Nix, nix-darwin, or home-manager generation involved.
-      placeholder: "Example: nix-darwin generation 42, home-manager generation 17"
+      label: Nix 或 Home Manager generation
+      description: 如果相关，请提供 Nix、nix-darwin 或 Home Manager 的 generation 信息。
+      placeholder: "例如：nix-darwin generation 42，Home Manager generation 17"
     validations:
       required: false
   - type: textarea
     id: logs
     attributes:
-      label: Relevant logs or output
-      description: Paste any relevant error output.
+      label: 相关日志或输出
+      description: 粘贴与问题相关的错误输出。
       render: shell
     validations:
       required: false

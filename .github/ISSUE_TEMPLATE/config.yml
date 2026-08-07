@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Feature ideas and personal changes
+  - name: 功能想法与个人修改
     url: https://github.com/JokerQianwei/dotfiles/fork
-    about: Feature requests are not accepted here, but you are welcome to fork this repo and make it yours.
+    about: 本仓库不接受功能请求；欢迎 Fork 后维护自己的版本。

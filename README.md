@@ -1,94 +1,88 @@
 # dotfiles
 
-My personal Mac setup, managed with nix-darwin and home-manager.
-One repo, one command, and a fresh Mac ends up configured the same way every time.
+这是我的个人 Mac 配置，由 nix-darwin 和 Home Manager 管理。新 Mac 克隆仓库后，运行一个命令即可复现同一套环境。
 
-## Contributing / Using This Repo
+## 使用与贡献
 
-These are my personal dotfiles, shared publicly so people can read them, learn from them, and fork them freely.
-Feature requests and pull requests are not accepted here, and PRs are auto-closed.
-If you find a bug, please open a GitHub Issue using the bug report template.
+这个仓库公开供阅读、参考和自由派生，但不接受功能请求或 Pull Request，PR 会被自动关闭。
+如果发现问题，请使用 Bug 报告模板提交 GitHub Issue。
 
-## What you get
+## 包含内容
 
-Running the switch builds:
+应用配置后会管理：
 
-- System settings (dark mode, key repeat, dock, Finder, trackpad)
-- Homebrew apps (casks and CLI tools)
-- Nix user packages (Git, GitHub CLI, Delta, Neovim, eza, zoxide, tmux, ripgrep, fd, fzf, jq, Hack Nerd Font)
-- Shell (zsh, aliases, starship prompt)
-- Editor (Neovim config with the Nord theme)
-- Optional Pi theme and local extensions, generic UI settings and model overrides, plus tracked or pinned third-party Pi packages
+- 系统设置：深色模式、按键重复、Dock、Finder、触控板
+- Homebrew 应用：cask 和命令行工具
+- Nix 用户软件：Git、GitHub CLI、Delta、Neovim、eza、zoxide、tmux、ripgrep、fd、fzf、jq、Hack Nerd Font
+- Shell：Zsh、别名、Starship 提示符
+- 编辑器：使用 Nord 主题的 Neovim 配置
+- 可选的 Pi 主题、本地扩展、通用界面设置、模型覆盖，以及已跟踪或固定版本的第三方 Pi 包
 
-## Prerequisites
+## 前置条件
 
-- Apple Silicon Mac, by default.
-- Intel Mac: change one line.
-  In `configuration.nix`, set `nixpkgs.hostPlatform = "x86_64-darwin";` (the comment right there tells you the same thing).
+- 默认面向 Apple Silicon Mac。
+- Intel Mac 需要在 `configuration.nix` 中设置：
 
-## Fresh-machine setup
+  ```nix
+  nixpkgs.hostPlatform = "x86_64-darwin";
+  ```
 
-On a brand new Mac, from a bare clone of this repo:
+## 新 Mac 安装
+
+在新 Mac 上克隆仓库：
 
 ```sh
 git clone https://github.com/JokerQianwei/dotfiles.git
 cd dotfiles
 ```
 
-Before you run it: review "Make it yours" below.
-Change the host label or CPU architecture if needed, and read the Homebrew cleanup warning.
-`bootstrap.sh` applies the config to your machine, so do this first.
+运行前先阅读下方的“改成你自己的配置”，按需修改用户名、主机标识和 CPU 架构，并确认 Homebrew 清理警告。
 
 ```sh
 ./bootstrap.sh
 ```
 
-`bootstrap.sh` does four things, in order:
+`bootstrap.sh` 依次执行：
 
-1. Installs Determinate Nix, if it isn't already installed.
-2. Symlinks this repo to `~/.dotfiles`.
-   This has to happen before the first build, because `home.nix` points at config files through `~/.dotfiles`.
-3. Checks the `user` configured in `flake.nix` against your actual macOS username, and offers to fix it for you if they differ.
-4. Runs the first `darwin-rebuild switch`.
-   It fetches the `darwin-rebuild` tool from the nix-darwin 26.05 release branch, then applies this repo's locked flake config.
+1. 尚未安装时，安装 Determinate Nix。
+2. 将当前仓库链接到 `~/.dotfiles`。首次构建前必须完成这一步，因为 `home.nix` 通过该路径引用配置文件。
+3. 检查 `flake.nix` 中的 `user` 是否与当前 macOS 用户名一致；不一致时询问是否修改。
+4. 首次运行 `darwin-rebuild switch`。脚本会从 nix-darwin 26.05 发布分支获取 `darwin-rebuild`，再应用仓库锁定的 flake 配置。
 
-After that, `darwin-rebuild` exists and you're on the normal workflow below.
+完成后即可使用下面的日常工作流。
 
-### Validate without applying
+### 只验证，不应用
 
-Once Nix is installed (`bootstrap.sh` step 1 handles that), you can check that the config builds without touching your system - handy when you have edited something:
+安装 Nix 后，可以在不修改系统的情况下检查配置：
 
 ```sh
 nix flake check --no-build
 nix build .#darwinConfigurations.mac.system --dry-run
 ```
 
-If you renamed the host label in "Make it yours", substitute your label for `mac` in these commands.
+如果修改了主机标识，请将命令中的 `mac` 替换为对应名称。
 
-## Daily use
+## 日常使用
 
-Edit the config files in place, then apply:
+直接编辑配置，然后运行：
 
 ```sh
 ./rebuild.sh
 ```
 
-That's it.
-No separate build-and-copy step.
+不需要额外执行构建和复制。
 
-## Make it yours
+## 改成你自己的配置
 
-This repo is mine.
-If you clone it, review these before you run `bootstrap.sh`:
+首次运行 `bootstrap.sh` 前检查：
 
-- **Username**: run `./bootstrap.sh` (it detects your macOS username and offers to set it) OR change the single `user = "qianwei"` line in `flake.nix`.
-  Everything else (`configuration.nix`, `home.nix`, home directory paths) is threaded from that one variable.
-- **Host label** `"mac"`, in three places: `flake.nix` (the `darwinConfigurations."mac"` name), `rebuild.sh:5` (the `#mac` at the end of the flake reference), and `bootstrap.sh`'s first-switch command (also `#mac`).
-  All three have to match.
-- **CPU architecture**, `hostPlatform` in `configuration.nix` (see Prerequisites above).
+- **用户名**：运行 `./bootstrap.sh` 让脚本检测并修改，或者直接修改 `flake.nix` 中唯一的 `user = "qianwei"`。`configuration.nix`、`home.nix` 和用户目录都由该变量生成。
+- **主机标识**：默认是 `"mac"`，分别出现在 `flake.nix` 的 `darwinConfigurations."mac"`、`rebuild.sh:5` 的 `#mac`，以及 `bootstrap.sh` 的首次切换命令中。三处必须一致。
+- **CPU 架构**：修改 `configuration.nix` 中的 `hostPlatform`。
 
-**Git identity:** `home.nix` contains my public GitHub name and noreply address.
-Replace them with your own before making commits:
+### Git 身份
+
+`home.nix` 包含我的公开 GitHub 用户名和 noreply 邮箱。提交代码前请替换成你自己的信息：
 
 ```nix
 programs.git = {
@@ -100,84 +94,97 @@ programs.git = {
 };
 ```
 
-**Homebrew cleanup warning:** `configuration.nix` sets `homebrew.onActivation.cleanup = "zap"`.
-That means every time you switch, Homebrew removes any package or cask on your machine that isn't listed in the `brews` and `casks` arrays in `configuration.nix`.
-If you already have Homebrew stuff installed that isn't in that list, the first switch will uninstall it.
-Read through `brews` and `casks` before you run `bootstrap.sh` or `rebuild.sh` for the first time, and add anything you want to keep.
+### Homebrew 清理警告
 
-**About `herdr`:** it's in the `brews` list.
-It's a real public Homebrew formula (`brew info herdr` finds it in homebrew-core, no tap needed), so it will install fine.
-If you don't use it, just remove it from `brews` in your copy.
+`configuration.nix` 设置了：
 
-**Heads-up:**
+```nix
+homebrew.onActivation.cleanup = "zap";
+```
 
-## Repo tour
+每次应用配置时，Homebrew 都会删除 `brews` 和 `casks` 中未声明的软件，并清理 cask 声明的关联文件。首次运行 `bootstrap.sh` 或 `rebuild.sh` 前，务必检查这两个清单并加入需要保留的软件。
 
-- `flake.nix` - the entry point.
-  Wires up nixpkgs, nix-darwin, home-manager, and nix-homebrew, and declares the `mac` machine.
-- `configuration.nix` - system-level config: macOS defaults, Homebrew.
-- `home.nix` - user-level config: shell, packages, prompt, and the symlinks described below.
-- `rebuild.sh` - re-applies the config after the first switch.
-  Run this every time you make a change.
-- `home/` - the actual config files that get symlinked into place; the sections below explain the shared symlink model and Pi's narrower selective setup.
+### Herdr
 
-## How the symlinks work
+`herdr` 已列在 `brews` 中。它是 Homebrew Core 的公开 formula，可用 `brew info herdr` 查询。无需使用时可从清单删除。
 
-The files under `home/` are the real files - editing them here is editing your live config, no rebuild needed to see the change in your editor.
-`home.nix` uses `mkOutOfStoreSymlink` to point paths like `~/.config/nvim` straight at `home/.config/nvim` in this repo, so the two never drift out of sync.
-You only run `./rebuild.sh` when you change something that isn't just a symlinked file, like a package list or a system default.
+## 仓库结构
 
-## Optional Pi configuration
+- `flake.nix`：入口文件，连接 nixpkgs、nix-darwin、Home Manager 和 nix-homebrew，并声明 `mac` 主机。
+- `configuration.nix`：系统级配置，包括 macOS 默认设置和 Homebrew。
+- `home.nix`：用户级配置，包括 Shell、软件、提示符和文件链接。
+- `rebuild.sh`：首次安装后重新应用配置。
+- `home/`：由 Home Manager 链接到用户目录的实际配置文件。
 
-Pi is an opt-in CLI, not a dependency this repository vendors. Install it from its owner with the [official Pi instructions](https://pi.dev), for example:
+## 文件链接方式
+
+`home/` 中保存的是配置源文件。`home.nix` 使用 `mkOutOfStoreSymlink`，将 `~/.config/nvim` 等路径直接链接到仓库，因此编辑仓库文件就是编辑实时配置。
+
+修改链接文件通常无需重建；修改软件清单或系统默认设置后，需要运行 `./rebuild.sh`。
+
+## 可选的 Pi 配置
+
+Pi 是可选 CLI，本仓库不内置它。请按 [Pi 官方说明](https://pi.dev)安装，例如：
 
 ```sh
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-Home Manager owns the repository-authored `~/.pi/agent/extensions` and `~/.pi/agent/skills` directories. It also links the tracked `packages/pi-herdr-btw` package and the individual `models.json`, `settings.json`, and `pi-herdr-btw.json` files. The extension directory includes the edit router, tcodex fast-mode adapter, and empty-upstream-error retry patch synchronized from `safe2`, plus the local Calm and terminal-title extensions. The retry patch works with the bounded retry policy in `settings.json`. The skills directory contains standard Agent Skills copies of Agent-Native Hardening and Anti-AI Copy with their references and MIT licenses, rather than loading them from npm. The adapted third-party BTW package stays under `packages/` with its upstream license. Run `/reload` after editing Pi resources. Pi uses the pinned Nord package as its only configured theme.
+Home Manager 管理仓库编写的 `~/.pi/agent/extensions` 和 `~/.pi/agent/skills`，并分别链接已跟踪的 `packages/pi-herdr-btw`、`models.json`、`settings.json` 和 `pi-herdr-btw.json`。
+
+扩展目录包括：
+
+- edit 路由器
+- tcodex 快速模式适配器
+- 从 `safe2` 同步的空上游错误重试补丁
+- 本地 Calm 扩展
+- 终端标题扩展
+
+重试补丁使用 `settings.json` 中有上限的重试策略。Skills 目录保存 Agent-Native Hardening 和 Anti-AI Copy 的标准 Agent Skills 副本及其参考资料和 MIT 许可证，不再从 npm 加载。修改 Pi 资源后运行 `/reload`。Pi 只配置了固定版本的 Nord 主题包。
 
 ### Pi Calm
 
-`home/.pi/agent/extensions/calm` is a standalone local Pi extension. Home Manager's existing global extensions-directory link makes Pi auto-load it without another declaration. `/calm` toggles a conversation-only presentation mode and is off by default. Its choice is stored locally in `~/.pi/agent/calm` (or the directory selected by `PI_CODING_AGENT_DIR`), not in this repository or Home Manager. Adapted from Firstmate under the bundled MIT license, Calm imports no Firstmate modules and has no Firstmate runtime dependency.
+`home/.pi/agent/extensions/calm` 是独立的本地 Pi 扩展，通过全局扩展目录链接自动加载。`/calm` 用于切换仅影响当前对话显示的 Calm 模式，默认关闭。选择状态保存在 `~/.pi/agent/calm`，或 `PI_CODING_AGENT_DIR` 指定的目录中，不进入仓库或 Home Manager。
 
-When enabled, Calm hides collapsed thinking and the call/result shells for Pi's seven built-in tools (`read`, `bash`, `edit`, `write`, `grep`, `find`, and `ls`) without leaving blank transcript rows. During an active run it replaces Pi's working row with a two-line animated blue-water, yellow-boat widget. `/calm` restores Pi's stock rendering and preserves the existing Ctrl+O tool-expansion choice.
+Calm 改编自 Firstmate，保留其 MIT 许可证，但不导入 Firstmate 模块，也没有 Firstmate 运行时依赖。
 
-Calm never changes prompts, tool execution, model context, session data, or ordering. `/share` and `/export` use the complete stock transcript. Generic custom tools, images, and unsupported Pi transcript classes deliberately remain visible because Pi has no safe general-purpose transcript filter. If a future Pi release no longer exports the exact collapsed-thinking rendering seam, Calm logs one diagnostic and leaves only that adapter disabled; all other behavior remains available.
+启用后，Calm 会隐藏折叠的思考内容，以及 Pi 七个内置工具（`read`、`bash`、`edit`、`write`、`grep`、`find`、`ls`）的调用和结果外壳，不留下空白记录行。执行期间，工作状态行会替换为两行动画。关闭 `/calm` 后恢复 Pi 原始渲染，并保留现有的 Ctrl+O 工具展开选择。
 
-Pi's package system declares these tracked or pinned third-party sources in the linked global `settings.json`:
+Calm 不修改提示词、工具执行、模型上下文、会话数据或消息顺序。`/share` 和 `/export` 始终使用完整原始记录。通用自定义工具、图片和不支持的记录类型仍会显示，因为 Pi 没有安全的通用记录过滤接口。如果未来 Pi 不再导出当前使用的折叠思考渲染接口，Calm 只禁用对应适配器并记录一次诊断，其余功能继续工作。
 
-- `npm:pi-web-access@0.14.0` - web access tools for Pi.
-- `./packages/pi-herdr-btw` - the `safe2` adaptation of `pi-herdr-btw@0.3.0`, including its `--down` split override and Herdr shell-readiness retry. Its non-sensitive defaults are tracked in `pi-herdr-btw.json`.
-- `npm:@maddeye/pi-nord@1.0.0` - the only configured Pi theme.
-- `npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6` - the exact public npm release from `ryan_nookpi`.
-- `git:github.com/algal/pi-openai-server-compaction@c6d593087709e9481223dc6c6c2269b371b5e055` - the exact public `algal` commit for experimental OpenAI server-side compaction.
+### Pi 第三方包
 
-The npm versions and git commit are immutable pins, so Pi does not move them during package updates. The local BTW package is instead versioned directly in this repository. Deliberate updates require a source review and an explicit repository or pin change. On Pi 0.82.0, global settings declarations install missing pinned packages automatically at startup. No one-time install command is required. Pi keeps downloaded npm and git package trees in its own unmanaged `~/.pi/agent/npm` and `~/.pi/agent/git` runtime directories, outside Home Manager and Git tracking.
+全局 `settings.json` 声明了以下本地或固定版本来源：
 
-These packages execute with your full user permissions and must be trusted like any other executable code. The compaction package is experimental, sends the relevant OpenAI compaction and continuity data to OpenAI, and upstream declares the stale peer range `>=0.80.9 <0.81.0`; this exact immutable ref was locally proven to load and perform remote compaction on Pi 0.82.0. Do not treat that proof as a guarantee for a different Pi version or a different package ref.
+- `npm:pi-web-access@0.14.0`：Pi 网络访问工具。
+- `./packages/pi-herdr-btw`：基于 `pi-herdr-btw@0.3.0` 的 `safe2` 适配版，增加 `--down` 分屏覆盖和 Herdr Shell 就绪重试；非敏感默认值保存在 `pi-herdr-btw.json`。
+- `npm:@maddeye/pi-nord@1.0.0`：唯一配置的 Pi 主题。
+- `npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6`：`ryan_nookpi` 发布的固定 npm 版本。
+- `git:github.com/algal/pi-openai-server-compaction@c6d593087709e9481223dc6c6c2269b371b5e055`：实验性 OpenAI 服务端压缩扩展的固定公开提交。
 
-Home Manager deliberately does not manage `~/.pi/agent` itself, or Pi authentication, sessions, trust decisions, caches, npm/git package trees, or any other runtime state. The model overrides contain no credentials or endpoint settings, do not choose a default model, and only take effect after you authenticate Pi yourself. This remains an additive post-video layer: it does not install Pi, a launcher, or package source code into this repository.
+npm 版本和 Git 提交均为不可变固定值，不会随 Pi 包更新自动移动。本地 BTW 包直接由仓库管理；更新它或第三方固定版本前，需要先审查来源，再显式修改仓库或版本。
 
-## Notes
+在 Pi 0.82.0 上，全局设置会在启动时自动安装缺失的固定包，无需额外执行一次性安装命令。Pi 下载的 npm 和 Git 包保存在未受管理的 `~/.pi/agent/npm` 和 `~/.pi/agent/git` 中，不进入 Home Manager 或 Git。
 
-The first time you launch `nvim`, it bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) by cloning plugins from GitHub.
-That needs network access once; after that it's offline.
-Neovim uses the Nord theme and a transparent background.
+这些包拥有当前用户的完整权限，必须像其他可执行代码一样审查和信任。压缩扩展是实验性的，会将相关 OpenAI 压缩和连续性数据发送给 OpenAI。上游声明的旧 peer 范围是 `>=0.80.9 <0.81.0`；当前固定提交只在本地验证过可加载并能在 Pi 0.82.0 上执行远程压缩，这不保证其他 Pi 版本或提交也可用。
 
-### Clipboard image hotkey
+Home Manager 不管理整个 `~/.pi/agent`，也不管理 Pi 认证、会话、信任决定、缓存、npm/Git 包目录或其他运行时状态。模型覆盖文件不包含凭据或端点，不选择默认模型，只在自行完成 Pi 认证后生效。
 
-One local hotkey helper pastes a clipboard image into a remote Pi session:
+## 其他说明
 
-1. `pngpaste` writes the clipboard image to a temporary PNG.
-2. SSH uploads it to a private remote image directory.
-3. The returned remote path replaces the local clipboard.
-4. Ghostty is focused and the path is pasted into the active session.
+首次启动 `nvim` 时，配置会从 GitHub 克隆 [lazy.nvim](https://github.com/folke/lazy.nvim) 及插件，需要联网一次，之后可离线使用。Neovim 使用 Nord 主题和透明背景。
 
-Only `pngpaste`, the public dependency, is declared here. The app bundle, destination,
-SSH alias or address, logs, and Accessibility permission stay local.
+### 剪贴板图片快捷键
 
-## License
+本机有一个未跟踪的快捷键辅助程序，用于将剪贴板图片粘贴到远程 Pi 会话：
 
-This repo is licensed under MIT No Attribution.
-See `LICENSE`.
+1. `pngpaste` 将剪贴板图片写入临时 PNG。
+2. SSH 将图片上传到私有远程目录。
+3. 返回的远程路径写回本机剪贴板。
+4. Ghostty 获得焦点，并将路径粘贴到当前会话。
+
+仓库只声明公开依赖 `pngpaste`。App Bundle、目标地址、SSH 别名或 IP、日志和辅助功能权限均保留在本机。
+
+## 许可证
+
+本仓库采用 MIT No Attribution 许可证，详见 `LICENSE`。
