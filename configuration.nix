@@ -37,9 +37,6 @@
     brews = [
       "herdr"
     ];
-    casks = [
-      "wezterm"
-      "claude-code"
-    ];
+    casks = [ ];
   };
 }
