@@ -142,20 +142,9 @@ Home Manager 管理仓库编写的 `~/.pi/agent/extensions` 和 `~/.pi/agent/ski
 - edit 路由器
 - tcodex 快速模式适配器
 - 从 `safe2` 同步的空上游错误重试补丁
-- 本地 Calm 扩展
 - 终端标题扩展
 
 重试补丁使用 `settings.json` 中有上限的重试策略。Skills 目录保存 Agent-Native Hardening 和 Anti-AI Copy 的标准 Agent Skills 副本及其参考资料和 MIT 许可证，不再从 npm 加载。修改 Pi 资源后运行 `/reload`。Pi 只配置了固定版本的 Nord 主题包。
-
-### Pi Calm
-
-`home/.pi/agent/extensions/calm` 是独立的本地 Pi 扩展，通过全局扩展目录链接自动加载。`/calm` 用于切换仅影响当前对话显示的 Calm 模式，默认关闭。选择状态保存在 `~/.pi/agent/calm`，或 `PI_CODING_AGENT_DIR` 指定的目录中，不进入仓库或 Home Manager。
-
-Calm 改编自 Firstmate，保留其 MIT 许可证，但不导入 Firstmate 模块，也没有 Firstmate 运行时依赖。
-
-启用后，Calm 会隐藏折叠的思考内容，以及 Pi 七个内置工具（`read`、`bash`、`edit`、`write`、`grep`、`find`、`ls`）的调用和结果外壳，不留下空白记录行。执行期间，工作状态行会替换为两行动画。关闭 `/calm` 后恢复 Pi 原始渲染，并保留现有的 Ctrl+O 工具展开选择。
-
-Calm 不修改提示词、工具执行、模型上下文、会话数据或消息顺序。`/share` 和 `/export` 始终使用完整原始记录。通用自定义工具、图片和不支持的记录类型仍会显示，因为 Pi 没有安全的通用记录过滤接口。如果未来 Pi 不再导出当前使用的折叠思考渲染接口，Calm 只禁用对应适配器并记录一次诊断，其余功能继续工作。
 
 ### Pi 第三方包
 
