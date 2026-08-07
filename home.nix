@@ -9,13 +9,17 @@ in
   home.homeDirectory = "/Users/${user}";
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
-    # cli i use constantly
-    ripgrep   # fast search
-    fd        # fast find
-    fzf       # fuzzy finder
-    jq        # json on the command line
-    lazygit
+    git
+    gh
+    delta
     neovim
+    eza
+    zoxide
+    tmux
+    ripgrep
+    fd
+    fzf
+    jq
     # the font everything renders in
     nerd-fonts.hack
   ];
