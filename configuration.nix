@@ -38,7 +38,21 @@
       "herdr"
     ];
     casks = [
+      "1password"
+      "1password-cli"
       "ghostty"
+      "keka"
+      "mos"
+      "pearcleaner"
+      "sublime-text"
+      "visual-studio-code"
     ];
+    masApps = {
+      Bob = 1630034110;
+      "Microsoft Excel" = 462058435;
+      "Microsoft PowerPoint" = 462062816;
+      "Microsoft Word" = 462054704;
+      Shadowrocket = 932747118;
+    };
   };
 }
