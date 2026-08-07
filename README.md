@@ -143,7 +143,7 @@ Pi is an opt-in CLI, not a dependency this repository vendors. Install it from i
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-Home Manager owns exactly two repository-authored Pi directories: `~/.pi/agent/themes` and `~/.pi/agent/extensions`. It also links the tracked `packages/pi-herdr-btw` package and the individual `models.json`, `settings.json`, and `pi-herdr-btw.json` files. The local extension directory is for public, repository-authored extensions only; the adapted third-party BTW package stays under `packages/` with its upstream license. Run `/reload` after editing a local extension or other Pi resources. The terminal-title extension shows a spinner while Pi is working, then a completion mark with the session name or current directory. The `rose-pine-moon` theme was authored clean-room from the public [Rosé Pine Moon palette](https://rosepinetheme.com/palette) and Pi's [public theme schema](https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json), not from a private or live theme file.
+Home Manager owns the repository-authored `~/.pi/agent/extensions` directory. It also links the tracked `packages/pi-herdr-btw` package and the individual `models.json`, `settings.json`, and `pi-herdr-btw.json` files. The extension directory includes the edit router and tcodex fast-mode adapter synchronized from `safe2`, plus the local Calm and terminal-title extensions. The adapted third-party BTW package stays under `packages/` with its upstream license. Run `/reload` after editing Pi resources. Pi uses the pinned Nord package as its only configured theme.
 
 ### Pi Calm
 
@@ -157,6 +157,7 @@ Pi's package system declares these tracked or pinned third-party sources in the 
 
 - `npm:pi-web-access@0.14.0` - web access tools for Pi.
 - `./packages/pi-herdr-btw` - the `safe2` adaptation of `pi-herdr-btw@0.3.0`, including its `--down` split override and Herdr shell-readiness retry. Its non-sensitive defaults are tracked in `pi-herdr-btw.json`.
+- `npm:@maddeye/pi-nord@1.0.0` - the only configured Pi theme.
 - `npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6` - the exact public npm release from `ryan_nookpi`.
 - `git:github.com/algal/pi-openai-server-compaction@c6d593087709e9481223dc6c6c2269b371b5e055` - the exact public `algal` commit for experimental OpenAI server-side compaction.
 
