@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+manifest="${1:-$HOME/.dotfiles/home/.config/vscode/extensions.txt}"
+
+command -v code >/dev/null 2>&1 || {
+  printf '找不到 VS Code 命令：code\n' >&2
+  exit 1
+}
+
+[ -r "$manifest" ] || {
+  printf '无法读取扩展清单：%s\n' "$manifest" >&2
+  exit 1
+}
+
+while IFS= read -r extension; do
+  [ -n "$extension" ] || continue
+  code --install-extension "$extension" --force
+done < "$manifest"

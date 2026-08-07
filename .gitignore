@@ -1,21 +1,22 @@
-# herdr runtime artifacts (regenerated at runtime; never commit)
+# Herdr 运行时文件会自动生成，不进入仓库
 home/.config/herdr/*.log
 home/.config/herdr/session.json
 home/.config/herdr/*.sock
 
-# macOS + nix build noise
+# macOS 和 Nix 构建文件
 .DS_Store
 result
 result-*
 
-# Pi credentials and Home Manager adoption backups stay local
+# Pi 凭据和 Home Manager 接管前的备份只保留在本机
 /home/.pi/agent/auth.json
 /home/.pi/agent/**/*.backup
 
-# Credentials and machine-local account state
+# 凭据和机器本地账号状态
 /home/.ssh/
 /home/.aws/
-/home/.config/gh/
+/home/.config/gh/*
+!/home/.config/gh/config.yml
 /home/.config/gcloud/
 /home/.git-credentials
 /home/.netrc
@@ -25,5 +26,5 @@ result-*
 **/*.pem
 
 
-# no-mistakes local validation state - never commit in this public repo
+# no-mistakes 本地验证状态不得提交到公开仓库
 .no-mistakes/

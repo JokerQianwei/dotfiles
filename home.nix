@@ -106,10 +106,20 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/config";
   home.file.".config/karabiner/karabiner.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
+  home.file."Library/Application Support/Code/User/settings.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/vscode/settings.json";
+  home.file."Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings";
+  home.file."Library/Application Support/Sublime Text/Packages/User/Package Control.sublime-settings".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Application Support/Sublime Text/Packages/User/Package Control.sublime-settings";
+  home.file.".config/gh/config.yml".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/gh/config.yml";
   home.file.".tmux.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
   home.file."bin/pi-paste-image-safe2".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/pi-paste-image-safe2";
+  home.file."bin/install-vscode-extensions".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/install-vscode-extensions";
   # Keep Pi's credential and runtime state local by linking only authored files and directories.
   home.file.".pi/agent/extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/extensions";

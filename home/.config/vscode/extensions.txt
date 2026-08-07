@@ -1,0 +1,11 @@
+emilijanmb.sublime-text-4-theme@1.1.2
+james-yu.latex-workshop@10.17.1
+ms-ceintl.vscode-language-pack-zh-hans@1.131.2026072717
+ms-python.debugpy@2026.6.0
+ms-python.python@2026.4.0
+ms-python.vscode-pylance@2026.3.1
+ms-python.vscode-python-envs@1.36.0
+ms-vscode-remote.remote-ssh-edit@0.87.0
+ms-vscode-remote.remote-ssh@0.124.0
+ms-vscode.remote-explorer@0.5.0
+yassh.copy-with-line-numbers@0.0.4

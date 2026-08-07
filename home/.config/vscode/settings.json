@@ -1,0 +1,20 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDragAndDrop": false,
+    "editor.minimap.enabled": false,
+    "explorer.confirmDelete": false,
+    "git.confirmSync": false,
+    "workbench.startupEditor": "none",
+    "workbench.colorTheme": "Sublime Text 4 Theme",
+    "explorer.confirmPasteNative": false,
+    "files.autoSave": "onFocusChange",
+    "workbench.browser.showInTitleBar": false,
+    "chat.titleBar.openInAgentsWindow.enabled": false,
+    "window.commandCenter": false,
+    "workbench.secondarySideBar.showLabels": false,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.renderSideBySide": true,
+    "diffEditor.experimental.showMoves": true,
+    "go.toolsManagement.autoUpdate": true
+}

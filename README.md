@@ -127,6 +127,14 @@ homebrew.onActivation.cleanup = "zap";
 
 修改链接文件通常无需重建；修改软件清单或系统默认设置后，需要运行 `./rebuild.sh`。
 
+### 恢复 VS Code 扩展
+
+VS Code 设置由 Home Manager 链接，扩展及固定版本记录在 `home/.config/vscode/extensions.txt`。安装清单中的扩展：
+
+```sh
+install-vscode-extensions
+```
+
 ## 可选的 Pi 配置
 
 Pi 是可选 CLI，本仓库不内置它。请按 [Pi 官方说明](https://pi.dev)安装，例如：
