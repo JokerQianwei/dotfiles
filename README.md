@@ -143,7 +143,7 @@ Pi is an opt-in CLI, not a dependency this repository vendors. Install it from i
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-Home Manager owns the repository-authored `~/.pi/agent/extensions` directory. It also links the tracked `packages/pi-herdr-btw` package and the individual `models.json`, `settings.json`, and `pi-herdr-btw.json` files. The extension directory includes the edit router, tcodex fast-mode adapter, and empty-upstream-error retry patch synchronized from `safe2`, plus the local Calm and terminal-title extensions. The retry patch works with the bounded retry policy in `settings.json`. The adapted third-party BTW package stays under `packages/` with its upstream license. Run `/reload` after editing Pi resources. Pi uses the pinned Nord package as its only configured theme.
+Home Manager owns the repository-authored `~/.pi/agent/extensions` and `~/.pi/agent/skills` directories. It also links the tracked `packages/pi-herdr-btw` package and the individual `models.json`, `settings.json`, and `pi-herdr-btw.json` files. The extension directory includes the edit router, tcodex fast-mode adapter, and empty-upstream-error retry patch synchronized from `safe2`, plus the local Calm and terminal-title extensions. The retry patch works with the bounded retry policy in `settings.json`. The skills directory contains standard Agent Skills copies of Agent-Native Hardening and Anti-AI Copy with their references and MIT licenses, rather than loading them from npm. The adapted third-party BTW package stays under `packages/` with its upstream license. Run `/reload` after editing Pi resources. Pi uses the pinned Nord package as its only configured theme.
 
 ### Pi Calm
 
