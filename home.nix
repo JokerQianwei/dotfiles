@@ -9,9 +9,7 @@ in
   home.homeDirectory = "/Users/${user}";
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
-    git
     gh
-    delta
     neovim
     eza
     tmux
@@ -58,6 +56,32 @@ in
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "JokerQianwei";
+        email = "72345663+JokerQianwei@users.noreply.github.com";
+      };
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
+      fetch.prune = true;
+      merge.conflictStyle = "zdiff3";
+      diff.colorMoved = "zebra";
+      alias.df = "!git -c delta.side-by-side=true diff";
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      line-numbers = true;
+      syntax-theme = "Nord";
+    };
   };
 
   programs.starship = {
