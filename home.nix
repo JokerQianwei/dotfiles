@@ -158,10 +158,6 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/REALTIME-SYSTEM-PROMPT.md";
   home.file.".pi/agent/openai-fast.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/openai-fast.json";
-  home.file.".pi/agent/pi-auto-trees.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-auto-trees.json";
-  home.file.".pi/agent/pi-codex-conversion.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-codex-conversion.json";
   home.file.".pi/agent/pi-explore-subagents.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-explore-subagents.json";
   home.file.".pi/agent/pi-smart-btw.json".source =
