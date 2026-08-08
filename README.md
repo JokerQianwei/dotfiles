@@ -147,13 +147,9 @@ restore-app-preferences
 
 全局 Git 忽略规则直接声明在 `home.nix`，包括 macOS 文件、编辑器临时文件和本地 `.env` 文件。
 
-## 可选的 Pi 配置
+## Pi 配置
 
-Pi 是可选 CLI，本仓库不内置它。请按 [Pi 官方说明](https://pi.dev)安装，例如：
-
-```sh
-npm install -g --ignore-scripts @earendil-works/pi-coding-agent
-```
+Pi 由 Homebrew 的公开 formula `pi-coding-agent` 安装，不需要另外运行 npm 全局安装。认证和模型定义仍只保留在本机。
 
 Home Manager 管理仓库编写的 `~/.pi/agent/extensions` 和 `~/.pi/agent/skills`，以及共享的 `~/.agents/skills`。Pi、Codex 和 Claude 分别通过 `~/.pi/agent/AGENTS.md`、`~/.codex/AGENTS.md` 和 `~/.claude/CLAUDE.md` 共用 `home/AGENTS.md`。
 
