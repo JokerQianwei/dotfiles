@@ -1,26 +1,47 @@
 {
-  "images": {
-    "blockImages": false
-  },
+  "lastChangelogVersion": "0.84.1",
+  "theme": "nord",
   "terminal": {
     "showImages": false
   },
   "hideThinkingBlock": true,
   "quietStartup": true,
-  "theme": "nord",
-  "steeringMode": "all",
-  "followUpMode": "all",
-  "collapseChangelog": true,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "npm:@petechu/pi-extension-toggle@0.1.3",
+    "npm:@pi-kaush/pi-inline-skill-identifier@0.1.1",
+    "git:github.com/algal/pi-openai-server-compaction@c6d593087709e9481223dc6c6c2269b371b5e055",
+    "npm:@maddeye/pi-nord@1.0.0",
+    {
+      "source": "npm:@quintinshaw/pi-dynamic-workflows@3.5.1",
+      "extensions": [],
+      "skills": [],
+      "prompts": [],
+      "themes": []
+    },
+    "npm:pi-web-access-lazy@0.1.0"
+  ],
+  "extensions": [],
+  "enabledModels": [
+    "codebuddy/kimi-k3-ioa",
+    "openai-codex/gpt-5.6-sol",
+    "openai-codex/gpt-5.6-luna",
+    "opencode-go/grok-4.5",
+    "opencode-go/deepseek-v4-flash",
+    "tclaude/claude-opus-4-8[1m]",
+    "tclaude/claude-opus-4-6[1m]"
+  ],
+  "compaction": {
+    "enabled": true
+  },
   "retry": {
     "enabled": true,
     "maxRetries": 5,
     "baseDelayMs": 2000
   },
-  "packages": [
-    "npm:pi-web-access@0.14.0",
-    "./packages/pi-herdr-btw",
-    "npm:@maddeye/pi-nord@1.0.0",
-    "npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6",
-    "git:github.com/algal/pi-openai-server-compaction@c6d593087709e9481223dc6c6c2269b371b5e055"
-  ]
+  "pi-codex-fast": {
+    "enabled": false
+  }
 }

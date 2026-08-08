@@ -155,34 +155,36 @@ Pi 是可选 CLI，本仓库不内置它。请按 [Pi 官方说明](https://pi.d
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-Home Manager 管理仓库编写的 `~/.pi/agent/extensions` 和 `~/.pi/agent/skills`，并分别链接已跟踪的 `packages/pi-herdr-btw`、`models.json`、`settings.json` 和 `pi-herdr-btw.json`。
+Home Manager 管理仓库编写的 `~/.pi/agent/extensions` 和 `~/.pi/agent/skills`，以及共享的 `~/.agents/skills`。Pi、Codex 和 Claude 分别通过 `~/.pi/agent/AGENTS.md`、`~/.codex/AGENTS.md` 和 `~/.claude/CLAUDE.md` 共用 `home/AGENTS.md`。
 
-扩展目录包括：
+`models.json`、认证、会话、信任状态和缓存不进入仓库。真实 `mcp.json` 含私有地址和认证 Header，也只保留在本机；`mcp.example.json` 仅记录脱敏结构。
+
+当前扩展目录包括：
 
 - edit 路由器
 - tcodex 快速模式适配器
 - 从 `safe2` 同步的空上游错误重试补丁
-- 终端标题扩展
 
-重试补丁使用 `settings.json` 中有上限的重试策略。Skills 目录保存 Agent-Native Hardening 和 Anti-AI Copy 的标准 Agent Skills 副本及其参考资料和 MIT 许可证，不再从 npm 加载。修改 Pi 资源后运行 `/reload`。Pi 只配置了固定版本的 Nord 主题包。
+重试补丁使用 `settings.json` 中有上限的重试策略。Pi Skills 目录保存 Agent-Native Hardening 和 Anti-AI Copy；共享 Skills 目录保存其他全局工作流。修改 Pi 资源后运行 `/reload`。当前 npm 包均固定到明确版本，Git 包固定到明确提交。
 
 ### Pi 第三方包
 
 全局 `settings.json` 声明了以下本地或固定版本来源：
 
-- `npm:pi-web-access@0.14.0`：Pi 网络访问工具。
-- `./packages/pi-herdr-btw`：基于 `pi-herdr-btw@0.3.0` 的 `safe2` 适配版，增加 `--down` 分屏覆盖和 Herdr Shell 就绪重试；非敏感默认值保存在 `pi-herdr-btw.json`。
+- `npm:@petechu/pi-extension-toggle@0.1.3`
+- `npm:@pi-kaush/pi-inline-skill-identifier@0.1.1`
+- `npm:pi-web-access-lazy@0.1.0`
 - `npm:@maddeye/pi-nord@1.0.0`：唯一配置的 Pi 主题。
-- `npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6`：`ryan_nookpi` 发布的固定 npm 版本。
+- `npm:@quintinshaw/pi-dynamic-workflows@3.5.1`：包已安装，但扩展、Skills、提示模板和主题均通过空资源过滤器禁用。
 - `git:github.com/algal/pi-openai-server-compaction@c6d593087709e9481223dc6c6c2269b371b5e055`：实验性 OpenAI 服务端压缩扩展的固定公开提交。
 
-npm 版本和 Git 提交均为不可变固定值，不会随 Pi 包更新自动移动。本地 BTW 包直接由仓库管理；更新它或第三方固定版本前，需要先审查来源，再显式修改仓库或版本。
+npm 版本和 Git 提交均为不可变固定值，不会随 Pi 包更新自动移动。更新第三方固定版本前，需要先审查来源，再显式修改版本。
 
-在 Pi 0.82.0 上，全局设置会在启动时自动安装缺失的固定包，无需额外执行一次性安装命令。Pi 下载的 npm 和 Git 包保存在未受管理的 `~/.pi/agent/npm` 和 `~/.pi/agent/git` 中，不进入 Home Manager 或 Git。
+Pi 会在启动时自动安装缺失的固定包，无需额外执行一次性安装命令。下载的 npm 和 Git 包保存在未受管理的 `~/.pi/agent/npm` 和 `~/.pi/agent/git` 中，不进入 Home Manager 或 Git。
 
 这些包拥有当前用户的完整权限，必须像其他可执行代码一样审查和信任。压缩扩展是实验性的，会将相关 OpenAI 压缩和连续性数据发送给 OpenAI。上游声明的旧 peer 范围是 `>=0.80.9 <0.81.0`；当前固定提交只在本地验证过可加载并能在 Pi 0.82.0 上执行远程压缩，这不保证其他 Pi 版本或提交也可用。
 
-Home Manager 不管理整个 `~/.pi/agent`，也不管理 Pi 认证、会话、信任决定、缓存、npm/Git 包目录或其他运行时状态。模型覆盖文件不包含凭据或端点，不选择默认模型，只在自行完成 Pi 认证后生效。
+Home Manager 不管理整个 `~/.pi/agent`，也不管理模型定义、Pi 认证、会话、信任决定、缓存、npm/Git 包目录或其他运行时状态。
 
 ## 其他说明
 

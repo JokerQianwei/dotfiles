@@ -10,7 +10,10 @@ result-*
 
 # Pi 凭据和 Home Manager 接管前的备份只保留在本机
 /home/.pi/agent/auth.json
+/home/.pi/agent/models.json*
+/home/.pi/agent/mcp.json
 /home/.pi/agent/**/*.backup
+/home/.pi/agent/**/*.bak*
 
 # 凭据和机器本地账号状态
 /home/.ssh/

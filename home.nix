@@ -138,15 +138,38 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/install-vscode-extensions";
   home.file."bin/restore-app-preferences".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/restore-app-preferences";
-  # Keep Pi's credential and runtime state local by linking only authored files and directories.
+  # Pi、Codex 和 Claude 共用同一份全局 Agent 说明。
+  home.file.".pi/agent/AGENTS.md".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/AGENTS.md";
+  home.file.".codex/AGENTS.md".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/AGENTS.md";
+  home.file.".claude/CLAUDE.md".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/AGENTS.md";
+  home.file.".agents/skills".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.agents/skills";
+  # Pi 的凭据和运行状态留在本机，只链接编写或审查过的资源。
   home.file.".pi/agent/extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/extensions";
   home.file.".pi/agent/skills".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/skills";
-  home.file.".pi/agent/models.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/models.json";
   home.file.".pi/agent/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/settings.json";
+  home.file.".pi/agent/REALTIME-SYSTEM-PROMPT.md".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/REALTIME-SYSTEM-PROMPT.md";
+  home.file.".pi/agent/openai-fast.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/openai-fast.json";
+  home.file.".pi/agent/pi-auto-trees.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-auto-trees.json";
+  home.file.".pi/agent/pi-codex-conversion.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-codex-conversion.json";
+  home.file.".pi/agent/pi-explore-subagents.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-explore-subagents.json";
+  home.file.".pi/agent/pi-smart-btw.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-smart-btw.json";
+  home.file.".pi/agent/pi-subagent-review.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-subagent-review.json";
+  home.file.".pi/agent/semantic-grep.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/semantic-grep.json";
   home.file.".pi/agent/pi-herdr-btw.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-herdr-btw.json";
   home.file.".pi/agent/packages/pi-herdr-btw".source =

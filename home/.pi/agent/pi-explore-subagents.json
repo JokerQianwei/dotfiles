@@ -1,0 +1,10 @@
+{
+  "shallow": {
+    "model": "opencode-go/deepseek-v4-flash",
+    "thinking": "high"
+  },
+  "deep": {
+    "model": "opencode-go/deepseek-v4-flash",
+    "thinking": "max"
+  }
+}
