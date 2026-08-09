@@ -28,8 +28,12 @@
       mru-spaces = false;
       wvous-br-corner = 14;  # Quick Note
     };
-    finder.FXPreferredViewStyle = "Nlsv";  # list view by default
-    finder.CreateDesktop = false;          # clean desktop
+    finder = {
+      FXPreferredViewStyle = "Nlsv";  # list view by default
+      CreateDesktop = false;          # clean desktop
+      ShowPathbar = true;
+      _FXShowPosixPathInTitle = false;
+    };
     trackpad = {
       Clicking = true;              # tap to click
       TrackpadRightClick = true;
