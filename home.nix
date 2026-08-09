@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }:
+{ config, lib, pkgs, user, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
@@ -20,15 +20,51 @@ in
     nerd-fonts.hack
   ];
   fonts.fontconfig.enable = true;
-  home.sessionVariables.EDITOR = "nvim";
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/go/bin"
+  ];
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "code --wait";
+    SSH_AUTH_SOCK = "${config.home.homeDirectory}/.1password/agent.sock";
+  };
 
   programs.zsh = {
     enable = true;
+    autocd = true;
     autosuggestion.enable = true;      # ghost text from history
     syntaxHighlighting.enable = true;  # commands turn green when valid
-    initContent = ''
-      bindkey '^f' autosuggest-accept
+    history = {
+      append = true;
+      size = 100000;
+      save = 100000;
+      path = "${config.home.homeDirectory}/.zsh_history";
+      ignoreDups = true;
+      ignoreSpace = true;
+      share = true;
+    };
+    setOptions = [
+      "HIST_REDUCE_BLANKS"
+      "INTERACTIVE_COMMENTS"
+    ];
+    profileExtra = ''
+      if [ -x /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
+      typeset -U path PATH
+      path=("$HOME/.local/bin" "$HOME/go/bin" $path)
     '';
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 ''
+        if command -v brew >/dev/null 2>&1; then
+          fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+        fi
+      '')
+      (lib.mkOrder 1000 ''
+        bindkey '^f' autosuggest-accept
+      '')
+    ];
     shellAliases = {
       ".." = "cd ..";
       add = "git add .";
@@ -42,11 +78,29 @@ in
     };
   };
 
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.mise = {
+    enable = true;
+    enableZshIntegration = true;
+    globalConfig.tools = {
+      go = "1.26.3";
+      node = "24.16.0";
+      python = "3.13.13";
+    };
+  };
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
     defaultCommand = "fd --type f --hidden --follow --exclude .git";
     fileWidgetCommand = "fd --type f --hidden --follow --exclude .git";
+    fileWidgetOptions = [
+      "--preview 'head -200 {} 2>/dev/null'"
+    ];
     changeDirWidgetCommand = "fd --type d --hidden --follow --exclude .git";
     changeDirWidgetOptions = [
       "--preview 'eza --tree --level=2 --icons=auto --color=always {} 2>/dev/null | head -200'"
