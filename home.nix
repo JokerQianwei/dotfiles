@@ -208,16 +208,8 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/skills";
   home.file.".pi/agent/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/settings.json";
-  home.file.".pi/agent/REALTIME-SYSTEM-PROMPT.md".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/REALTIME-SYSTEM-PROMPT.md";
   home.file.".pi/agent/openai-fast.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/openai-fast.json";
-  home.file.".pi/agent/pi-explore-subagents.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-explore-subagents.json";
-  home.file.".pi/agent/pi-subagent-review.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-subagent-review.json";
-  home.file.".pi/agent/semantic-grep.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/semantic-grep.json";
   home.file.".pi/agent/pi-herdr-btw.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-herdr-btw.json";
   home.file.".pi/agent/packages/pi-herdr-btw".source =

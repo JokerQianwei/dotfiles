@@ -157,7 +157,7 @@ Pi 由 Homebrew 的公开 formula `pi-coding-agent` 安装，不需要另外运�
 
 Home Manager 管理仓库编写的 `~/.pi/agent/extensions` 和 `~/.pi/agent/skills`，以及共享的 `~/.agents/skills`。Pi、Codex 和 Claude 分别通过 `~/.pi/agent/AGENTS.md`、`~/.codex/AGENTS.md` 和 `~/.claude/CLAUDE.md` 共用 `home/AGENTS.md`。
 
-`models.json`、认证、会话、信任状态和缓存不进入仓库。真实 `mcp.json` 含私有地址和认证 Header，也只保留在本机；`mcp.example.json` 仅记录脱敏结构。
+`models.json`、认证、会话、信任状态和缓存不进入仓库。真实 `mcp.json` 含私有地址和认证 Header，也只保留在本机。
 
 当前扩展目录包括：
 

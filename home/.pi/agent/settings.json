@@ -42,8 +42,5 @@
     "enabled": true,
     "maxRetries": 5,
     "baseDelayMs": 2000
-  },
-  "pi-codex-fast": {
-    "enabled": false
   }
 }
