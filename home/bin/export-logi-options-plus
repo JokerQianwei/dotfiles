@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "$#" -gt 1 ]; then
+  printf '用法：export-logi-options-plus [输出文件]\n' >&2
+  exit 2
+fi
+
+database="$HOME/Library/Application Support/LogiOptionsPlus/settings.db"
+output="${1:-$HOME/.dotfiles/home/.config/logi-options-plus/settings.json}"
+
+command -v sqlite3 >/dev/null 2>&1 || {
+  printf '找不到 sqlite3\n' >&2
+  exit 1
+}
+command -v jq >/dev/null 2>&1 || {
+  printf '找不到 jq\n' >&2
+  exit 1
+}
+[ -r "$database" ] || {
+  printf '无法读取 Logi Options+ 设置：%s\n' "$database" >&2
+  exit 1
+}
+
+mkdir -p "$(dirname "$output")"
+tmp="$(mktemp "${TMPDIR:-/tmp}/logi-options-plus.XXXXXX")"
+trap 'rm -f "$tmp"' EXIT
+
+sqlite3 -readonly "$database" 'select file from data order by _id desc limit 1' |
+  jq -e '
+    def profile_by_name($name):
+      . as $root
+      | first($root.applications.applications[]? | select(.name == $name) | .applicationId) as $id
+      | $root["profile-\($id)"];
+    def active_profile:
+      first(
+        to_entries[]
+        | select(.key | startswith("profile-"))
+        | select(.value.activeForApplication == true)
+        | .value
+      );
+    def assignment($profile; $suffix):
+      first($profile.assignments[]? | select(.slotId | endswith($suffix)));
+    def normalize_name:
+      sub("^ASSIGNMENT_NAME_"; "") | ascii_downcase | gsub("_"; "-");
+
+    . as $root
+    | ($root | active_profile) as $default
+    | ($root | profile_by_name("Visual Studio Code")) as $vscode
+    | (assignment($default; "_mouse_settings")) as $pointer
+    | (assignment($default; "_mouse_scroll_wheel_settings")) as $wheel
+    | (assignment($default; "_mouse_thumb_wheel_settings")) as $thumb
+    | (assignment($default; "_thumb_wheel_adapter")) as $defaultThumbAction
+    | (assignment($vscode; "_thumb_wheel_adapter")) as $vscodeThumbAction
+    | (first($default.assignments[]? | select(.slotId | endswith("_backlighting_settings")))) as $backlight
+    | {
+        schemaVersion: 1,
+        devices: {
+          "mx-master-3s": {
+            pointerSpeed: $pointer.card.mouseSettings.pointerSpeed.active.value,
+            mainWheel: {
+              direction: ($wheel.card.mouseScrollWheelSettings.dir | ascii_downcase),
+              smartShift: {
+                enabled: $wheel.card.mouseScrollWheelSettings.smartshift.isEnabled,
+                mode: ($wheel.card.mouseScrollWheelSettings.smartshift.mode | ascii_downcase),
+                sensitivity: $wheel.card.mouseScrollWheelSettings.smartshift.sensitivity
+              }
+            },
+            thumbWheel: {
+              direction: ($thumb.card.mouseThumbWheelSettings.dir | ascii_downcase),
+              smooth: $thumb.card.mouseThumbWheelSettings.isSmooth,
+              defaultAction: ($defaultThumbAction.card.name | normalize_name),
+              applicationActions: [{
+                application: "Visual Studio Code",
+                bundleId: "com.microsoft.VSCode",
+                action: ($vscodeThumbAction.card.name | normalize_name)
+              }]
+            },
+            buttons: {
+              gesture: (assignment($default; "_c195").card.name | normalize_name),
+              modeShift: (assignment($default; "_c196").card.name | normalize_name),
+              middle: (assignment($default; "_c82").card.name | normalize_name),
+              back: (assignment($default; "_c83").card.name | normalize_name),
+              forward: (assignment($default; "_c86").card.name | normalize_name)
+            }
+          },
+          "mx-mechanical": {
+            backlighting: {
+              enabled: $backlight.card.backlightingSettings.enabled,
+              powerSave: $backlight.card.backlightingSettings.powerSave,
+              mode: $backlight.card.backlightingSettings.backlightLevel.currentBlMode,
+              level: $backlight.card.backlightingSettings.backlightLevel.currentBlLevel,
+              manualDuration: {
+                handsIn: $backlight.card.backlightingSettings.backlightDuration.manualDuration.bldHandsin,
+                handsOut: $backlight.card.backlightingSettings.backlightDuration.manualDuration.bldHandsout,
+                powered: $backlight.card.backlightingSettings.backlightDuration.manualDuration.bldPowered
+              }
+            }
+          }
+        },
+        radialMenu: [
+          $default.assignments[]?
+          | select(.slotId | startswith("radial-menu-"))
+          | {
+              position: ((.slotId | capture("_c(?<id>[0-9]+)$").id | tonumber) - 407),
+              action: (.card.name | normalize_name),
+              shortcut: (.card.macro.actionName // .card.macro.mouse.action // null)
+            }
+        ]
+      }
+  ' > "$tmp"
+
+jq -e '
+  [.devices["mx-master-3s"].buttons[]] - ["gesture", "mode-shift", "middle-button", "back", "forward"] == []
+  and .devices["mx-master-3s"].thumbWheel.defaultAction == "zoom-in-out"
+  and .devices["mx-master-3s"].thumbWheel.applicationActions[0].action == "horizontal-scroll"
+  and ([.radialMenu[].action] - ["cut", "copy", "paste", "forward", "back", "undo", "redo", "folder"] == [])
+  and ([.radialMenu[].shortcut | select(. != null)] - ["⌘X", "⌘C", "⌘V", "OSX_GESTURE_FORWARD", "OSX_GESTURE_BACK", "Cmd + Z", "Shift + Cmd + Z"] == [])
+' "$tmp" >/dev/null || {
+  printf '发现未审查的按键映射，拒绝导出；请先检查 Logi Options+ 当前设置。\n' >&2
+  exit 1
+}
+
+mv "$tmp" "$output"
+trap - EXIT
+printf '已导出脱敏 Logi Options+ 设置：%s\n' "$output"

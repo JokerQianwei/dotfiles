@@ -221,6 +221,8 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/install-vscode-extensions";
   home.file."bin/restore-app-preferences".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/restore-app-preferences";
+  home.file."bin/export-logi-options-plus".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/export-logi-options-plus";
   # Pi、Codex 和 Claude 共用同一份全局 Agent 说明。
   home.file.".pi/agent/AGENTS.md".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/AGENTS.md";

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "devices": {
+    "mx-master-3s": {
+      "pointerSpeed": 1,
+      "mainWheel": {
+        "direction": "natural",
+        "smartShift": {
+          "enabled": true,
+          "mode": "ratchet",
+          "sensitivity": 83
+        }
+      },
+      "thumbWheel": {
+        "direction": "standard",
+        "smooth": true,
+        "defaultAction": "zoom-in-out",
+        "applicationActions": [
+          {
+            "application": "Visual Studio Code",
+            "bundleId": "com.microsoft.VSCode",
+            "action": "horizontal-scroll"
+          }
+        ]
+      },
+      "buttons": {
+        "gesture": "gesture",
+        "modeShift": "mode-shift",
+        "middle": "middle-button",
+        "back": "back",
+        "forward": "forward"
+      }
+    },
+    "mx-mechanical": {
+      "backlighting": {
+        "enabled": true,
+        "powerSave": true,
+        "mode": "BLModeAutomatic",
+        "level": 4,
+        "manualDuration": {
+          "handsIn": 6,
+          "handsOut": 6,
+          "powered": 60
+        }
+      }
+    }
+  },
+  "radialMenu": [
+    {
+      "position": 1,
+      "action": "cut",
+      "shortcut": "⌘X"
+    },
+    {
+      "position": 2,
+      "action": "copy",
+      "shortcut": "⌘C"
+    },
+    {
+      "position": 3,
+      "action": "paste",
+      "shortcut": "⌘V"
+    },
+    {
+      "position": 4,
+      "action": "forward",
+      "shortcut": "OSX_GESTURE_FORWARD"
+    },
+    {
+      "position": 5,
+      "action": "back",
+      "shortcut": "OSX_GESTURE_BACK"
+    },
+    {
+      "position": 6,
+      "action": "undo",
+      "shortcut": "Cmd + Z"
+    },
+    {
+      "position": 7,
+      "action": "redo",
+      "shortcut": "Shift + Cmd + Z"
+    },
+    {
+      "position": 8,
+      "action": "folder",
+      "shortcut": null
+    }
+  ]
+}

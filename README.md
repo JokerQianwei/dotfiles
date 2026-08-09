@@ -149,6 +149,14 @@ HapiGo 与 Bob 的完整偏好中混有账号、API Key、历史和插件数据�
 restore-app-preferences
 ```
 
+Logi Options+ 的原始数据库含设备序列号、配对电脑名称和使用记录，不进入仓库。`home/.config/logi-options-plus/settings.json` 只记录鼠标、键盘和应用专属映射；修改设置后重新导出：
+
+```sh
+export-logi-options-plus
+```
+
+这份文件用于核对和手动恢复。Logi Options+ 没有稳定的公开导入接口，精确恢复仍依赖它自己的账号同步。
+
 全局 Git 忽略规则直接声明在 `home.nix`，包括 macOS 文件、编辑器临时文件和本地 `.env` 文件。
 
 ## Pi 配置
