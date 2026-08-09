@@ -160,8 +160,6 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/openai-fast.json";
   home.file.".pi/agent/pi-explore-subagents.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-explore-subagents.json";
-  home.file.".pi/agent/pi-smart-btw.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-smart-btw.json";
   home.file.".pi/agent/pi-subagent-review.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/pi-subagent-review.json";
   home.file.".pi/agent/semantic-grep.json".source =

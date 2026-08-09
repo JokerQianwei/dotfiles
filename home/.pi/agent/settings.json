@@ -21,7 +21,8 @@
       "prompts": [],
       "themes": []
     },
-    "npm:pi-web-access-lazy@0.1.0"
+    "npm:pi-web-access-lazy@0.1.0",
+    "./packages/pi-herdr-btw"
   ],
   "extensions": [],
   "enabledModels": [
