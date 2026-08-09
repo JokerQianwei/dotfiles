@@ -15,15 +15,27 @@
   system.defaults = {
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
+      AppleInterfaceStyleSwitchesAutomatically = true;
       KeyRepeat = 2;          # fast key repeat
       InitialKeyRepeat = 15;  # short delay before repeat
       _HIHideMenuBar = true;  # auto-hide the menu bar
       AppleShowAllExtensions = true;
+      "com.apple.trackpad.scaling" = 3.0;
     };
-    dock.autohide = true;
+    dock = {
+      autohide = true;
+      tilesize = 26;
+      mru-spaces = false;
+      wvous-br-corner = 14;  # Quick Note
+    };
     finder.FXPreferredViewStyle = "Nlsv";  # list view by default
     finder.CreateDesktop = false;          # clean desktop
-    trackpad.Clicking = true;              # tap to click
+    trackpad = {
+      Clicking = true;              # tap to click
+      TrackpadRightClick = true;
+      TrackpadThreeFingerDrag = true;
+    };
+    WindowManager.EnableTiledWindowMargins = false;
   };
   nix-homebrew = {
     enable = true;
@@ -60,6 +72,7 @@
       "uuremote"
       "visual-studio-code"
       "wechat"
+      "wetype"
     ];
     masApps = {
       Bob = 1630034110;

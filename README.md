@@ -16,7 +16,7 @@
 
 应用配置后会管理：
 
-- 系统设置：深色模式、按键重复、Dock、Finder、触控板
+- 系统设置：外观、按键重复、Dock、Finder、窗口平铺和触控板
 - Homebrew 应用：cask 和命令行工具
 - Nix 用户软件：Git、GitHub CLI、Delta、Neovim、eza、zoxide、tmux、ripgrep、fd、fzf、jq、Hack Nerd Font
 - Shell：Zsh、别名、Starship 提示符
@@ -112,6 +112,10 @@ homebrew.onActivation.cleanup = "zap";
 ### Herdr
 
 `herdr` 已列在 `brews` 中。它是 Homebrew Core 的公开 formula，可用 `brew info herdr` 查询。无需使用时可从清单删除。
+
+### 微信输入法
+
+微信输入法通过 Homebrew cask `wetype` 安装。首次安装后需要注销并重新登录，再到“系统设置 → 键盘 → 文本输入 → 编辑”中添加微信输入法。词库、账号和设备同步数据由微信输入法自己管理，不进入公开仓库。
 
 ## 仓库结构
 
