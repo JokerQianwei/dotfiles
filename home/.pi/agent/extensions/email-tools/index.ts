@@ -6,7 +6,7 @@ import {
 } from "@earendil-works/pi-coding-agent";
 import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { basename, extname, join } from "node:path";
 import { setTimeout } from "node:timers/promises";
 import { Type, type TSchema } from "typebox";
 
@@ -37,7 +37,7 @@ const EMAIL_TOOLS = [
     name: "email_notify_user",
     label: "Notify User",
     remoteName: "send_email",
-    hiddenParameters: ["mailboxId"],
+    hiddenParameters: ["mailboxId", "attachments"],
     optionalParameters: ["to"],
     description:
       "Email a recipient when work is blocked and needs their attention. Defaults to the user's email when to is omitted. Do not use for routine status updates.",
@@ -108,6 +108,7 @@ function publicSchema(
   schema: Record<string, unknown>,
   hiddenParameters: readonly string[],
   optionalParameters: readonly string[] = [],
+  addedProperties: Record<string, unknown> = {},
 ): TSchema {
   if (schema.type !== "object" || !isRecord(schema.properties)) {
     throw new Error("MCP tool parameters must use an object schema");
@@ -118,6 +119,7 @@ function publicSchema(
   const properties = Object.fromEntries(
     Object.entries(schema.properties).filter(([name]) => !hidden.has(name)),
   );
+  Object.assign(properties, addedProperties);
   const required = Array.isArray(schema.required)
     ? schema.required.filter(
         (name): name is string =>
@@ -175,20 +177,54 @@ async function discoverMcpTool(
   throw lastError;
 }
 
-function toolArguments(
+const MIME_TYPES: Record<string, string> = {
+  ".gif": "image/gif",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
+  ".pdf": "application/pdf",
+  ".png": "image/png",
+  ".txt": "text/plain",
+  ".webp": "image/webp",
+};
+
+async function toolArguments(
   tool: EmailTool,
   params: Record<string, unknown>,
   config: EmailConfig,
-) {
+): Promise<Record<string, unknown>> {
   if (tool.remoteName !== "send_email") {
     return { ...params, mailboxId: config.mailboxId };
   }
 
+  const localAttachments = Array.isArray(params.attachments) ? params.attachments : [];
+  if (localAttachments.length > 32) {
+    throw new Error("Email attachments cannot exceed 32 files");
+  }
+  const attachments = await Promise.all(localAttachments.map(async (value) => {
+    if (!isRecord(value) || typeof value.path !== "string") {
+      throw new Error("Each email attachment must define a local path");
+    }
+    const path = value.path;
+    const content = await readFile(path);
+    if (content.byteLength > 5 * 1024 * 1024) {
+      throw new Error(`Email attachment exceeds 5MiB: ${path}`);
+    }
+    const type =
+      typeof value.type === "string" && value.type
+        ? value.type
+        : MIME_TYPES[extname(path).toLowerCase()] ?? "application/octet-stream";
+    return {
+      content: content.toString("base64"),
+      filename: basename(path),
+      type,
+      disposition: "attachment",
+    };
+  }));
   const to =
     typeof params.to === "string" && params.to.trim()
       ? params.to
       : config.userEmail;
-  return { ...params, mailboxId: config.mailboxId, to };
+  return { ...params, attachments, mailboxId: config.mailboxId, to };
 }
 
 function truncateResult(output: string): string {
@@ -236,6 +272,23 @@ export default function emailToolsExtension(pi: ExtensionAPI) {
           definition.inputSchema,
           tool.hiddenParameters,
           "optionalParameters" in tool ? tool.optionalParameters : [],
+          tool.remoteName === "send_email"
+            ? {
+                attachments: {
+                  type: "array",
+                  description: "Local files to attach to the email",
+                  items: {
+                    type: "object",
+                    properties: {
+                      path: { type: "string", description: "Absolute local file path" },
+                      type: { type: "string", description: "Optional MIME type override" },
+                    },
+                    required: ["path"],
+                    additionalProperties: false,
+                  },
+                },
+              }
+            : {},
         ),
         executionMode: tool.remoteName === "send_email" ? "sequential" : "parallel",
         async execute(_toolCallId, params, signal) {
@@ -248,7 +301,7 @@ export default function emailToolsExtension(pi: ExtensionAPI) {
               MCP_SERVER,
               tool.remoteName,
               JSON.stringify(
-                toolArguments(
+                await toolArguments(
                   tool,
                   isRecord(params) ? params : {},
                   emailConfig,
