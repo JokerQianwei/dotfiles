@@ -89,6 +89,7 @@ in
     globalConfig.tools = {
       go = "1.26.3";
       node = "24.16.0";
+      "npm:mcp-call-cli" = "0.2.1";
       python = "3.13.13";
     };
   };
