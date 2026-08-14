@@ -68,6 +68,7 @@ in
     shellAliases = {
       ".." = "cd ..";
       add = "git add .";
+      vi = "nvim";
       push = "git push";
       pull = "git pull";
       m = "git switch main";
@@ -152,6 +153,27 @@ in
       syntax-theme = "Nord";
     };
   };
+
+  home.activation.setDefaultTextEditor = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    # 为常见文本格式显式设置关联，避免已有的 Sublime Text 关联继续优先。
+    for type in \
+      public.plain-text \
+      net.daringfireball.markdown \
+      public.json \
+      public.xml \
+      public.yaml \
+      public.toml \
+      public.comma-separated-values-text \
+      public.tab-separated-values-text \
+      com.apple.log \
+      txt md markdown json xml yaml yml toml csv tsv log conf ini
+    do
+      for role in viewer editor all
+      do
+        /opt/homebrew/bin/duti -s com.coteditor.CotEditor "$type" "$role"
+      done
+    done
+  '';
 
   programs.starship = {
     enable = true;

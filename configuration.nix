@@ -22,6 +22,9 @@
       AppleShowAllExtensions = true;
       "com.apple.trackpad.scaling" = 3.0;
     };
+    CustomUserPreferences."com.apple.HIToolbox".AppleGlobalTextInputProperties = {
+      TextInputGlobalPropertyPerContextInput = true;
+    };
     dock = {
       autohide = true;
       tilesize = 26;
@@ -51,7 +54,9 @@
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
     brews = [
+      "duti"
       "herdr"
+      "leetgo"
       "pi-coding-agent"
       "pngpaste"
     ];
@@ -60,6 +65,7 @@
       "1password-cli"
       "betterdisplay"
       "codexbar"
+      "coteditor"
       "ghostty"
       "google-chrome"
       "hapigo"

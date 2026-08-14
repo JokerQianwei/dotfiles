@@ -154,7 +154,7 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "hold_down_milliseconds": 20,
+                                        "hold_down_milliseconds": 50,
                                         "key_code": "spacebar",
                                         "modifiers": [
                                             "left_control"
@@ -334,7 +334,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + G => Open ChatGPT",
+                                "description": "Caps + G => Open ChatGPT Classic",
                                 "from": {
                                     "key_code": "g",
                                     "modifiers": {
@@ -349,7 +349,7 @@
                                     {
                                         "software_function": {
                                             "open_application": {
-                                                "file_path": "/Applications/ChatGPT.app"
+                                                "file_path": "/Applications/ChatGPT Classic.app"
                                             }
                                         }
                                     }
@@ -454,9 +454,9 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + S => Open Sublime Text",
+                                "description": "Caps + E => Open CotEditor",
                                 "from": {
-                                    "key_code": "s",
+                                    "key_code": "e",
                                     "modifiers": {
                                         "optional": [
                                             "left_command",
@@ -469,7 +469,7 @@
                                     {
                                         "software_function": {
                                             "open_application": {
-                                                "file_path": "/Applications/Sublime Text.app"
+                                                "file_path": "/Applications/CotEditor.app"
                                             }
                                         }
                                     }
@@ -1231,9 +1231,9 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + E -> Mission Control",
+                                "description": "Caps + S -> Mission Control",
                                 "from": {
-                                    "key_code": "e",
+                                    "key_code": "s",
                                     "modifiers": {
                                         "optional": [
                                             "any"

@@ -5,10 +5,10 @@
     "explorer.confirmDelete": false,
     "git.confirmSync": false,
     "workbench.startupEditor": "none",
-    "workbench.colorTheme": "Sublime Text 4 Theme",
     "explorer.confirmPasteNative": false,
     "files.autoSave": "onFocusChange",
     "workbench.browser.showInTitleBar": false,
+    "chat.disableAIFeatures": true,
     "chat.titleBar.openInAgentsWindow.enabled": false,
     "window.commandCenter": false,
     "workbench.secondarySideBar.showLabels": false,
@@ -16,5 +16,39 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": true,
     "diffEditor.experimental.showMoves": true,
-    "go.toolsManagement.autoUpdate": true
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.colorTheme": "Sublime Text 4 Theme",
+    "vim.leader": "<space>",
+    "vim.hlsearch": true,
+    "vim.incsearch": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<Esc>"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["<leader>", "e"],
+            "commands": ["workbench.view.explorer"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["<leader>", "s"],
+            "commands": ["workbench.action.quickTextSearch"]
+        },
+        {
+            "before": ["<leader>", "b"],
+            "commands": ["workbench.action.showAllEditorsByMostRecentlyUsed"]
+        },
+        {
+            "before": ["<leader>", "g"],
+            "commands": ["workbench.view.scm"]
+        },
+        {
+            "before": ["g", "r", "r"],
+            "commands": ["editor.action.goToReferences"]
+        }
+    ]
 }

@@ -4,5 +4,9 @@
 		"Vintage",
 	],
 	"index_files": true,
-	"show_git_status": true
+	"show_git_status": true,
+	"font_size": 12,
+	"neovintageous_build_version": 13200,
+	"vintageous_i_escape_jk": true,
+	"vintageous_use_sys_clipboard": true,
 }

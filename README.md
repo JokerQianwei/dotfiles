@@ -9,7 +9,7 @@ This repository started from [kunchenguid/dotfiles](https://github.com/kunchengu
 - macOS defaults for appearance, keyboard repeat, Dock, Finder, window tiling, and trackpad
 - Homebrew formulae, casks, and Mac App Store applications
 - command-line tools, fonts, Zsh, Starship, Git, and language runtimes
-- Neovim, Ghostty, tmux, Herdr, VS Code, Sublime Text, and selected application preferences
+- Neovim, Ghostty, tmux, Herdr, VS Code, Sublime Text, CotEditor, and selected application preferences
 - Karabiner keyboard layers and utility scripts
 - Pi extensions, skills, settings, and shared agent instructions
 
@@ -101,6 +101,8 @@ VS Code settings and pinned extension versions are stored under `home/.config/vs
 ```sh
 install-vscode-extensions
 ```
+
+CotEditor is the default application for common text-file formats.
 
 ## Application preferences
 

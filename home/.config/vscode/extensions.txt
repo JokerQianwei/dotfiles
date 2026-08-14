@@ -8,4 +8,5 @@ ms-python.vscode-python-envs@1.36.0
 ms-vscode-remote.remote-ssh-edit@0.87.0
 ms-vscode-remote.remote-ssh@0.124.0
 ms-vscode.remote-explorer@0.5.0
+vscodevim.vim@1.32.4
 yassh.copy-with-line-numbers@0.0.4
