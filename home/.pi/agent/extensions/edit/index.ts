@@ -8,7 +8,7 @@
  *     those models (apply_patch's Add File covers creation).
  *   - `edit` (Kimi old_string/new_string schema) for routed Kimi Code models.
  *   - `edit` (native JSON edits[].oldText schema) for everyone else. For
- *     Anthropic models, strict tool-use validation is enabled via
+ *     Anthropic models and tclaude Opus, strict tool-use validation is enabled via
  *     `before_provider_request`.
  *
  * Routing runs on `session_start`, `model_select`, and `agent_start` (the last
@@ -90,7 +90,7 @@ export default function editTool(pi: ExtensionAPI): void {
     routeEditTool(pi, ctx.model);
   });
 
-  // Anthropic strict tool-use: grammar-constrain the `edit` tool's output so
+  // Anthropic 直连模型及 tclaude Opus：约束 `edit` 工具输出，避免参数畸形。
   // the model cannot emit malformed edit arguments. The hook tightens the
   // edit tool's `input_schema` (sets `additionalProperties: false` and a
   // complete `required` list on every object node) and sets `strict: true` on

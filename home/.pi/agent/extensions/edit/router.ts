@@ -29,9 +29,13 @@ export function isCodexModel(model: ModelLike): boolean {
   );
 }
 
-/** Anthropic Claude models benefit from strict tool-use schema validation. */
+/** Anthropic 直连模型及 tclaude 转发的 Opus 模型启用严格工具参数约束。 */
 export function isAnthropicModel(model: ModelLike): boolean {
-  return model?.provider === "anthropic";
+  if (model?.provider === "anthropic") return true;
+  return (
+    model?.provider === "tclaude" &&
+    (model.id?.toLowerCase().startsWith("claude-opus") ?? false)
+  );
 }
 
 /** Kimi models tuned for Moonshot's old_string/new_string edit shape. */
