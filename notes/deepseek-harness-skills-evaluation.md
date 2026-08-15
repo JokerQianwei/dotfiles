@@ -67,27 +67,25 @@
 | Skill | 价值 | 结论 |
 | --- | --- | --- |
 | `dsh-archive-agent-notes` | 中 | “按未来决策价值保留、归档或删除”的判断适合维护 `AGENTS.md` 项目记忆；三文件归档、封存哈希等机制不适合当前仓库。 |
-| `dsh-doc-standards` | 中 | 文档先定层级、主题和读者，再写 prose 的方法很好；当前仓库文档规模小，不值得引入预算、双语配对和文档分类基础设施。 |
 | `record-browser-gif` | 中，场景限定 | 对 GUI 项目很有价值：同一 commit、真实服务、隔离状态、语义状态截图、编码后复验构成完整证据链。dotfiles 当前没有产品 Web UI，不应常驻启用。 |
 | `dsh-merging-stacked-prs` | 低，场景限定 | 只有采用 GitHub 官方 stacked PR 工作流时才有用；当前仓库没有该流程，保留链接即可。 |
 
-来源：[dsh-archive-agent-notes](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-archive-agent-notes/SKILL.md)、[dsh-doc-standards](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-doc-standards/SKILL.md)、[record-browser-gif](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/record-browser-gif/SKILL.md)、[dsh-merging-stacked-prs](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-merging-stacked-prs/SKILL.md)
+来源：[dsh-archive-agent-notes](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-archive-agent-notes/SKILL.md)、[record-browser-gif](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/record-browser-gif/SKILL.md)、[dsh-merging-stacked-prs](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-merging-stacked-prs/SKILL.md)
 
 ## 当前没有价值
 
 - `dsh-doc-site-sync`：完全绑定 DeepSeek Harness 的 VitePress 投影、manifest 和双语路由。
+- `dsh-doc-standards`：文档层级、预算、双语配对和门禁均绑定 DeepSeek Harness，对当前工作流没有实际价值。
 - `dsh-translate-docs`：绑定 `foo.md` / `foo.zh.md` / `foo.i18n.yaml` 三文件协议和专用脚本。
 
 除非未来项目采用相同文档架构，否则移植它们只会增加无消费者的流程。
 
-来源：[dsh-doc-site-sync](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-doc-site-sync/SKILL.md)、[dsh-translate-docs](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-translate-docs/SKILL.md)
+来源：[dsh-doc-site-sync](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-doc-site-sync/SKILL.md)、[dsh-doc-standards](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-doc-standards/SKILL.md)、[dsh-translate-docs](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-translate-docs/SKILL.md)
 
 ## 建议顺序
 
-1. 不复制任何上游 skill。
-2. 保留 `code-simplifier` 对局部、行为不变简化的所有权；把跨模块 simplification 的消费者证明、生命周期图和净删除量并入 `agent-native-hardening`。
-3. 把完整命题与 HEAD 可解析性测试并入 `anti-ai-copy`。
-4. 把真实入口、拒绝路径和最终边界检查并入现有 `code-review`。
-5. 仅当实际出现复杂 GUI PR 或 stacked PR 时，再安装对应的专用 skill。
+1. 以 `dsh-find-simplifications`、`dsh-prose-standard` 和 `dsh-trim-cot-leakage` 为基础维护通用版 `find-simplifications`、`prose-standard` 和 `trim-cot-leakage`。
+2. 其他上游 skill 不复制。
+3. 仅当实际出现复杂 GUI PR 或 stacked PR 时，再安装对应的专用 skill。
 
 这样能获得上游最通用的判断框架，同时避免新增四组重叠触发器和 DeepSeek Harness 专属流程。
