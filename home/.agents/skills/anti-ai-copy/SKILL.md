@@ -1,6 +1,7 @@
 ---
 name: anti-ai-copy
 description: "Voice-preserving prose drafting, rewriting, and review. Use for product copy, docs, READMEs, emails, posts, bios, essays, UI text, or removing AI/SaaS/corporate tells. Not detector analysis or mechanical proofreading."
+disable-model-invocation: true
 ---
 
 # Anti-AI Writing
