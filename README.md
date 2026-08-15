@@ -120,9 +120,8 @@ Karabiner also maps `Cmd+Option+V` and `Cmd+Shift+V` in Ghostty to `pi-paste-ima
 Pi is installed through the `pi-coding-agent` Homebrew formula. Home Manager links only repository-authored or reviewed resources:
 
 - `~/.pi/agent/extensions`
-- `~/.pi/agent/skills`
 - selected Pi settings and local packages
-- shared skills under `~/.agents/skills`
+- shared skills under `~/.agents/skills` for Pi, Codex, and Claude
 - `home/AGENTS.md` for Pi, Codex, and Claude
 
 The tracked Pi setup includes an edit-tool router, retry handling, fixed third-party package versions, and the local `pi-herdr-btw` package. Third-party packages execute with the current user's permissions; review `home/.pi/agent/settings.json` before enabling or updating them.

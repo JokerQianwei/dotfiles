@@ -258,8 +258,6 @@ in
   # Pi 的凭据和运行状态留在本机，只链接编写或审查过的资源。
   home.file.".pi/agent/extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/extensions";
-  home.file.".pi/agent/skills".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/skills";
   home.file.".pi/agent/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/settings.json";
   home.file.".pi/agent/openai-fast.json".source =
