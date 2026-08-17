@@ -16,15 +16,18 @@
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
       AppleInterfaceStyleSwitchesAutomatically = true;
-      KeyRepeat = 2;          # fast key repeat
-      InitialKeyRepeat = 15;  # short delay before repeat
+      KeyRepeat = 1;          # fast key repeat
+      InitialKeyRepeat = 10;  # short delay before repeat
       _HIHideMenuBar = true;  # auto-hide the menu bar
       AppleShowAllExtensions = true;
       "com.apple.trackpad.scaling" = 3.0;
     };
-    CustomUserPreferences."com.apple.HIToolbox".AppleGlobalTextInputProperties = {
-      TextInputGlobalPropertyPerContextInput = true;
+    CustomUserPreferences."com.apple.HIToolbox" = {
+      AppleGlobalTextInputProperties = {
+        TextInputGlobalPropertyPerContextInput = true;
+      };
     };
+    CustomUserPreferences.NSGlobalDomain.TISRomanSwitchState = 1;
     dock = {
       autohide = true;
       tilesize = 26;
@@ -55,6 +58,7 @@
     onActivation.extraFlags = [ "--force" ];
     brews = [
       "duti"
+      "fish"
       "herdr"
       "leetgo"
       "pi-coding-agent"
@@ -64,12 +68,15 @@
       "1password"
       "1password-cli"
       "betterdisplay"
+      "chromium"
       "codexbar"
       "coteditor"
+      "font-jetbrains-mono-nerd-font"
       "ghostty"
       "google-chrome"
       "hapigo"
       "keka"
+      "kitty"
       "karabiner-elements"
       "logi-options+"
       "mos"

@@ -71,7 +71,7 @@
                         ]
                     },
                     {
-                        "description": "Ghostty Cmd+Opt+V / Cmd+Shift+V: paste image to safe2",
+                        "description": "Kitty Cmd+Opt+V / Cmd+Shift+V: paste image to safe2",
                         "manipulators": [
                             {
                                 "type": "basic",
@@ -96,7 +96,7 @@
                                     {
                                         "type": "frontmost_application_if",
                                         "bundle_identifiers": [
-                                            "^com\\.mitchellh\\.ghostty$"
+                                            "^net\\.kovidgoyal\\.kitty$"
                                         ]
                                     }
                                 ]
@@ -124,7 +124,7 @@
                                     {
                                         "type": "frontmost_application_if",
                                         "bundle_identifiers": [
-                                            "^com\\.mitchellh\\.ghostty$"
+                                            "^net\\.kovidgoyal\\.kitty$"
                                         ]
                                     }
                                 ]
@@ -135,17 +135,7 @@
                         "description": "1. [CORE] Smart Caps Lock Controller",
                         "manipulators": [
                             {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "input_source_id": "^com\\.tencent\\.inputmethod\\.wetype$"
-                                            }
-                                        ],
-                                        "type": "input_source_if"
-                                    }
-                                ],
-                                "description": "Caps Lock -> Smart Caps Layer; tap WeType -> ABC",
+                                "description": "Caps Lock -> Smart Caps Layer; tap -> native input source switch",
                                 "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": {
@@ -153,6 +143,9 @@
                                             "any"
                                         ]
                                     }
+                                },
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 10000
                                 },
                                 "to": [
                                     {
@@ -164,54 +157,11 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "select_input_source": {
-                                            "input_source_id": "^com\\.apple\\.keylayout\\.ABC$"
-                                        }
-                                    }
-                                ],
-                                "to_after_key_up": [
+                                        "hold_down_milliseconds": 200,
+                                        "key_code": "caps_lock"
+                                    },
                                     {
-                                        "set_variable": {
-                                            "name": "smart_caps_mode",
-                                            "value": 0
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "input_source_id": "^com\\.tencent\\.inputmethod\\.wetype$"
-                                            }
-                                        ],
-                                        "type": "input_source_unless"
-                                    }
-                                ],
-                                "description": "Caps Lock -> Smart Caps Layer; tap other input source -> WeType",
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "smart_caps_mode",
-                                            "value": 1
-                                        }
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "select_input_source": {
-                                            "input_source_id": "^com\\.tencent\\.inputmethod\\.wetype$"
-                                        }
+                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "to_after_key_up": [
@@ -1405,335 +1355,6 @@
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "7. [LAYER: F-Keys] Caps + Numbers",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "1",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f1",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 1 => F1"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "2",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f2",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 2 => F2"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "3",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f3",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 3 => F3"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "4",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f4",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 4 => F4"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "5",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f5",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 5 => F5"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "6",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f6",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 6 => F6"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "7",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f7",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 7 => F7"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "8",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f8",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 8 => F8"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "9",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f9",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 9 => F9"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "0",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f10",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + 0 => F10"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "hyphen",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f11",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + - => F11"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "smart_caps_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "equal_sign",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f12",
-                                        "modifiers": [
-                                            "fn"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic",
-                                "description": "Caps + = => F12"
                             }
                         ]
                     },

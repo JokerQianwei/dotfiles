@@ -224,6 +224,10 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
   home.file.".config/ghostty/config".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/config";
+  home.file.".config/fish/config.fish".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/fish/config.fish";
+  home.file.".config/kitty/kitty.conf".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/kitty/kitty.conf";
   home.file.".config/karabiner/karabiner.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
   home.file."Library/Application Support/Code/User/settings.json".source =
