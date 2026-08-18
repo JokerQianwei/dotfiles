@@ -1239,7 +1239,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + Q -> Open Finder",
+                                "description": "Caps + Q -> Esc + switch to ABC input source",
                                 "from": {
                                     "key_code": "q",
                                     "modifiers": {
@@ -1250,7 +1250,12 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/bin/open \"$HOME\""
+                                        "key_code": "escape"
+                                    },
+                                    {
+                                        "select_input_source": {
+                                            "input_source_id": "^com\\.apple\\.keylayout\\.ABC$"
+                                        }
                                     }
                                 ],
                                 "type": "basic"
@@ -1263,7 +1268,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + S -> Mission Control",
+                                "description": "Caps + S -> Open Finder",
                                 "from": {
                                     "key_code": "s",
                                     "modifiers": {
@@ -1274,10 +1279,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "up_arrow",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
+                                        "shell_command": "/usr/bin/open \"$HOME\""
                                     }
                                 ],
                                 "type": "basic"

@@ -27,7 +27,10 @@
         TextInputGlobalPropertyPerContextInput = true;
       };
     };
-    CustomUserPreferences.NSGlobalDomain.TISRomanSwitchState = 1;
+    CustomUserPreferences.NSGlobalDomain = {
+      TISRomanSwitchState = 1;
+      TSMLanguageIndicatorEnabled = false;
+    };
     dock = {
       autohide = true;
       tilesize = 26;
