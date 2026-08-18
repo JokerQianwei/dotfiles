@@ -8,8 +8,8 @@ This repository started from [kunchenguid/dotfiles](https://github.com/kunchengu
 
 - macOS defaults for appearance, keyboard repeat, Dock, Finder, window tiling, and trackpad
 - Homebrew formulae, casks, and Mac App Store applications
-- command-line tools, fonts, Zsh, Starship, Git, and language runtimes
-- Neovim, Ghostty, tmux, Herdr, VS Code, Sublime Text, CotEditor, and selected application preferences
+- command-line tools, fonts, Zsh, Git, and language runtimes
+- Neovim, tmux, Herdr, VS Code, CotEditor, and selected application preferences
 - Karabiner keyboard layers and utility scripts
 - Pi extensions, skills, settings, and shared agent instructions
 
@@ -85,16 +85,15 @@ Key files:
 Home Manager configures:
 
 - Zsh with shared history, autosuggestions, syntax highlighting, and a small alias set
-- fzf, zoxide, direnv, eza, ripgrep, fd, jq, GitHub CLI, and Delta
+- fzf, ripgrep, fd, jq, and GitHub CLI
 - mise with pinned Go, Node.js, and Python versions
 - 1Password SSH agent integration
-- a Nord-colored Starship prompt
 
 ## Editors and terminal
 
 Neovim uses lazy.nvim, the Nord theme, built-in LSP, Oil, Snacks, Neogit, Gitsigns, Which-key, and Markdown rendering. The first launch downloads lazy.nvim and plugins from GitHub.
 
-Ghostty uses Nord with a translucent macOS background. Both tmux and Herdr use a backtick prefix and provide vi-oriented pane and copy workflows.
+Both tmux and Herdr use a backtick prefix and provide vi-oriented pane and copy workflows.
 
 VS Code settings and pinned extension versions are stored under `home/.config/vscode`. Restore the extensions with:
 
@@ -108,12 +107,11 @@ CotEditor is the default application for common text-file formats.
 
 Only preferences that are useful and safe to publish are tracked.
 
-- HapiGo, Bob, and Mos settings are restored with `restore-app-preferences`.
-- Snipaste, Sublime Text, GitHub CLI, Herdr, Ghostty, and Karabiner use linked configuration files.
+- Bob, Caffeine, Maccy, and Mos settings are restored with `restore-app-preferences`.
+- Snipaste, GitHub CLI, Herdr, and Karabiner use linked configuration files.
 - `export-logi-options-plus` extracts a reviewed, sanitized Logi Options+ snapshot. It is for inspection and manual recovery because Logi Options+ has no stable public import interface.
-- WeType dictionaries, account data, and sync state remain under the application's control.
 
-Karabiner also maps `Cmd+Option+V` and `Cmd+Shift+V` in Ghostty to `pi-paste-image-safe2`. The script uploads a clipboard image through the local SSH alias `safe2`, copies the remote path, and pastes it into Ghostty. Host details and credentials stay in the local SSH configuration.
+Karabiner also maps `Cmd+Option+V` and `Cmd+Shift+V` in Kitty to `pi-paste-image-safe2`. The script uploads a clipboard image through the local SSH alias `safe2`, copies the remote path, and pastes it into Kitty. Host details and credentials stay in the local SSH configuration.
 
 ## Pi and agent resources
 

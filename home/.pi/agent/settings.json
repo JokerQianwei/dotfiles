@@ -23,8 +23,7 @@
       "themes": []
     },
     "npm:pi-web-access-lazy@0.1.0",
-    "./packages/pi-herdr-btw",
-    "npm:remote-pi"
+    "./packages/pi-herdr-btw"
   ],
   "extensions": [],
   "enabledModels": [

@@ -10,7 +10,13 @@ vim.lsp.config('ts_ls', {
   root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
 })
 
-vim.lsp.enable({ 'gopls', 'ts_ls' })
+vim.lsp.config('pyright', {
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' },
+})
+
+vim.lsp.enable({ 'gopls', 'ts_ls', 'pyright' })
 
 -- 仅在 LSP 可用的缓冲区覆盖 gd，其他文件保留 Vim 的局部声明跳转。
 vim.api.nvim_create_autocmd('LspAttach', {

@@ -11,7 +11,6 @@ in
   home.packages = with pkgs; [
     gh
     neovim
-    eza
     tmux
     ripgrep
     fd
@@ -72,16 +71,7 @@ in
       push = "git push";
       pull = "git pull";
       m = "git switch main";
-      ls = "eza --icons=auto --group-directories-first";
-      ll = "eza -la --git --icons=auto --group-directories-first";
-      la = "eza -la --icons=auto --group-directories-first";
-      lt = "eza --tree --level=2 --icons=auto --group-directories-first";
     };
-  };
-
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
   };
 
   programs.mise = {
@@ -105,13 +95,8 @@ in
     ];
     changeDirWidgetCommand = "fd --type d --hidden --follow --exclude .git";
     changeDirWidgetOptions = [
-      "--preview 'eza --tree --level=2 --icons=auto --color=always {} 2>/dev/null | head -200'"
+      "--preview 'fd --max-depth 2 --hidden . {} 2>/dev/null | head -200'"
     ];
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
   };
 
   programs.git = {
@@ -139,23 +124,12 @@ in
       fetch.prune = true;
       merge.conflictStyle = "zdiff3";
       diff.colorMoved = "zebra";
-      alias.df = "!git -c delta.side-by-side=true diff";
       core.excludesFile = "~/.config/git/ignore";
     };
   };
 
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      navigate = true;
-      line-numbers = true;
-      syntax-theme = "Nord";
-    };
-  };
-
   home.activation.setDefaultTextEditor = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    # 为常见文本格式显式设置关联，避免已有的 Sublime Text 关联继续优先。
+    # 为常见文本格式显式设置关联，避免已有的编辑器关联继续优先。
     for type in \
       public.plain-text \
       net.daringfireball.markdown \
@@ -175,55 +149,11 @@ in
     done
   '';
 
-  programs.starship = {
-    enable = true;
-    settings = {
-      add_newline = false;
-      format = "$directory$git_branch$git_status$cmd_duration$line_break$character";
-      palette = "nord";
-      palettes.nord = {
-        nord0 = "#2E3440";
-        nord1 = "#3B4252";
-        nord2 = "#434C5E";
-        nord3 = "#4C566A";
-        nord4 = "#D8DEE9";
-        nord5 = "#E5E9F0";
-        nord6 = "#ECEFF4";
-        nord7 = "#8FBCBB";
-        nord8 = "#88C0D0";
-        nord9 = "#81A1C1";
-        nord10 = "#5E81AC";
-        nord11 = "#BF616A";
-        nord12 = "#D08770";
-        nord13 = "#EBCB8B";
-        nord14 = "#A3BE8C";
-        nord15 = "#B48EAD";
-      };
-      directory = {
-        truncate_to_repo = false;
-        truncation_length = 0;
-        style = "bold nord8";
-      };
-      git_branch.style = "bold nord9";
-      git_status.style = "nord13";
-      character = {
-        success_symbol = "[❯](nord14)";
-        error_symbol = "[❯](nord11)";
-      };
-      cmd_duration = {
-        format = "[$duration]($style) ";
-        style = "nord3";
-      };
-    };
-  };
-
   # Edit-in-place: the real file stays in my repo, ~/.config just points at it.
   home.file.".config/nvim".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
   home.file.".config/herdr/config.toml".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
-  home.file.".config/ghostty/config".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/config";
   home.file.".config/fish/config.fish".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/fish/config.fish";
   home.file.".config/kitty/kitty.conf".source =
@@ -232,10 +162,6 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
   home.file."Library/Application Support/Code/User/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/vscode/settings.json";
-  home.file."Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings";
-  home.file."Library/Application Support/Sublime Text/Packages/User/Package Control.sublime-settings".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Application Support/Sublime Text/Packages/User/Package Control.sublime-settings";
   home.file.".config/gh/config.yml".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/gh/config.yml";
   home.file.".snipaste/config.ini".source =
