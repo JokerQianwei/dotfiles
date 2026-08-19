@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+# tmux 3.4 会消费应用发出的 OSC 52，但不会继续写入外层终端。
+# 直接写入当前会话的客户端 TTY，避免依赖版本相关的转发行为。
+session=$(tmux display-message -p -t "${TMUX_PANE:?}" '#{session_name}')
+payload=$(base64 | tr -d '\r\n')
+
+tmux list-clients -F '#{client_session}|#{client_tty}' |
+while IFS='|' read -r client_session client_tty; do
+    [ "$client_session" = "$session" ] || continue
+    printf '\033]52;c;%s\033\\' "$payload" >"$client_tty"
+done
