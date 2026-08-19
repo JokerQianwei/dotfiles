@@ -11,7 +11,7 @@ o.scrolloff = 16               -- keep cursor away from the screen edge
 o.undofile = true              -- persistent undo across sessions
 o.mouse = ''                   -- no mouse in nvim; also lets Herdr keep host mouse capture off so Escape isn't swallowed
 
--- SSH 主机没有系统剪贴板工具时，通过终端的 OSC 52 写回本机剪贴板。
+-- SSH 主机没有系统剪贴板工具时，通过终端的 OSC 52 读写本机剪贴板。
 if vim.env.SSH_CONNECTION then
   vim.g.clipboard = {
     name = 'OSC 52',
@@ -20,8 +20,8 @@ if vim.env.SSH_CONNECTION then
       ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
     },
     paste = {
-      ['+'] = function() return { {}, 'v' } end,
-      ['*'] = function() return { {}, 'v' } end,
+      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
     },
   }
 end

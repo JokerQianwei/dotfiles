@@ -4,7 +4,7 @@
 [`47f9438`](https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a/.agents/skills)。
 上游共有 11 个 skill。以下结论针对当前 dotfiles 仓库与全局 Pi skill 组合，而不是评价这些 skill 在 DeepSeek Harness 自身的质量。
 
-当前仓库的 skills 统一位于 `home/.agents/skills/`，其中已有 `code-simplifier`、`code-review`、`prompt-optimizer`、`writing-great-skills`、`agent-native-hardening` 和 `anti-ai-copy` 等。因此应先扩充现有 owner，避免为相同触发条件再建 skill。
+当前仓库的 skills 统一位于 `home/.agents/skills/`，其中已有 `code-review`、`prompt-optimizer`、`writing-great-skills`、`agent-native-hardening`、`prose-standard` 和 `trim-cot-leakage` 等。因此应先扩充现有 owner，避免为相同触发条件再建 skill。
 
 ## 建议吸收
 
@@ -35,11 +35,11 @@
 
 来源：[dsh-pre-push-checks](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-pre-push-checks/SKILL.md)
 
-### 3. `dsh-prose-standard` + `dsh-trim-cot-leakage`：高价值，合并进现有 `anti-ai-copy`
+### 3. `dsh-prose-standard` + `dsh-trim-cot-leakage`：高价值，分别维护独立 owner
 
 两者最有价值的共同原则是：先枚举段落中的完整命题，再删除推理过程、改动叙事、评审对话和重复内容。`trim-cot-leakage` 的 HEAD 可解析性测试尤其好：读者不看会话、PR 线程或未提交草稿，是否仍能解析引用并验证主张。
 
-它们和现有 `anti-ai-copy` 高度重叠，模型可见文字部分也已有 `prompt-optimizer` 负责，不应新增两个相互触发的 skill。建议吸收：
+当前分别由 `prose-standard` 和 `trim-cot-leakage` 负责，模型可见文字部分则由 `prompt-optimizer` 负责。建议保留：
 
 - 保留 actor、条件、时序、义务强度、负面保证、所有权和失败后果；
 - 注释只保留代码无法表达的契约、竞态、所有权和非显然理由；
