@@ -15,7 +15,7 @@ in
     ripgrep
     fd
     jq
-    # the font everything renders in
+    # 终端使用的 Nerd Fonts。
     nerd-fonts.hack
   ];
   fonts.fontconfig.enable = true;
@@ -160,6 +160,8 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/kitty/kitty.conf";
   home.file.".config/karabiner/karabiner.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
+  home.file.".hammerspoon/init.lua".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.hammerspoon/init.lua";
   home.file."Library/Application Support/Code/User/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/vscode/settings.json";
   home.file.".config/gh/config.yml".source =
