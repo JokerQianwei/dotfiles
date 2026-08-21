@@ -11,6 +11,7 @@
 - 搜索文本时使用 `rg`，不要使用 `grep`。
 - 多个工具调用彼此独立时，应尽可能并行执行。
 - 无既定视觉规范时，UI 默认采用 Nord 风格：https://github.com/nordtheme/nord
+- 回复应简洁但信息充分；除工具调用和代码生成外，尽量控制在 1～4 句话以内。
 
 ## Project memory
 
