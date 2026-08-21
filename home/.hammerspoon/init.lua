@@ -4,18 +4,24 @@ local windows = hs.window.filter.defaultCurrentSpace
 local hyper = { 'cmd', 'ctrl', 'alt', 'shift' }
 
 local function cycle_window(step)
-  local visible = windows:getWindows(hs.window.filter.sortByCreated)
+  local focused = hs.window.focusedWindow()
+  if not focused then return end
+
+  local screen_id = focused:screen():id()
+  local visible = {}
+  for _, window in ipairs(windows:getWindows(hs.window.filter.sortByCreated)) do
+    if window:screen():id() == screen_id then
+      visible[#visible + 1] = window
+    end
+  end
   if #visible < 2 then return end
 
-  local focused = hs.window.focusedWindow()
   local target = 1
 
-  if focused then
-    for index, window in ipairs(visible) do
-      if window:id() == focused:id() then
-        target = ((index - 1 + step) % #visible) + 1
-        break
-      end
+  for index, window in ipairs(visible) do
+    if window:id() == focused:id() then
+      target = ((index - 1 + step) % #visible) + 1
+      break
     end
   end
 

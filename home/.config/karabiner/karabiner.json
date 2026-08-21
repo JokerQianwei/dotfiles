@@ -33,7 +33,7 @@
                         ]
                     },
                     {
-                        "description": "Backtick -> switch to ABC, then emit Backtick on key up",
+                        "description": "Backtick -> switch to ABC, then emit Backtick after 50 ms",
                         "manipulators": [
                             {
                                 "type": "basic",
@@ -62,11 +62,21 @@
                                         }
                                     }
                                 ],
-                                "to_after_key_up": [
-                                    {
-                                        "key_code": "grave_accent_and_tilde"
-                                    }
-                                ]
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                        {
+                                            "key_code": "grave_accent_and_tilde"
+                                        }
+                                    ],
+                                    "to_if_canceled": [
+                                        {
+                                            "key_code": "grave_accent_and_tilde"
+                                        }
+                                    ]
+                                },
+                                "parameters": {
+                                    "basic.to_delayed_action_delay_milliseconds": 50
+                                }
                             }
                         ]
                     },
@@ -505,12 +515,12 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + Shift + , -> Focus Left Display / 聚焦左侧显示器",
+                                "description": "Caps + Control + , -> Focus Left Display / 聚焦左侧显示器",
                                 "from": {
                                     "key_code": "comma",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift"
+                                            "control"
                                         ],
                                         "optional": [
                                             "any"
@@ -532,12 +542,12 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + Shift + . -> Focus Right Display / 聚焦右侧显示器",
+                                "description": "Caps + Control + . -> Focus Right Display / 聚焦右侧显示器",
                                 "from": {
                                     "key_code": "period",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift"
+                                            "control"
                                         ],
                                         "optional": [
                                             "any"
@@ -1359,12 +1369,12 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + Shift + \\ -> Last Window / 返回上一个窗口",
+                                "description": "Caps + Control + \\ -> Last Window / 返回上一个窗口",
                                 "from": {
                                     "key_code": "backslash",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift"
+                                            "control"
                                         ],
                                         "optional": [
                                             "any"
@@ -1392,12 +1402,12 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + Shift + ] -> Next Window / 下一个窗口",
+                                "description": "Caps + Control + ] -> Next Window / 下一个窗口",
                                 "from": {
                                     "key_code": "close_bracket",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift"
+                                            "control"
                                         ],
                                         "optional": [
                                             "any"
@@ -1425,12 +1435,12 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + Shift + [ -> Previous Window / 上一个窗口",
+                                "description": "Caps + Control + [ -> Previous Window / 上一个窗口",
                                 "from": {
                                     "key_code": "open_bracket",
                                     "modifiers": {
                                         "mandatory": [
-                                            "shift"
+                                            "control"
                                         ],
                                         "optional": [
                                             "any"
