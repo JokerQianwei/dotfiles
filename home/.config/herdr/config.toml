@@ -9,7 +9,7 @@ split_vertical = 'prefix+\'
 pane_history = true
 
 [theme]
-name = "nord"
+name = "terminal"
 auto_switch = false
 
 [ui]
