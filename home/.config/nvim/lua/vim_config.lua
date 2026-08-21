@@ -11,24 +11,32 @@ o.scrolloff = 16               -- keep cursor away from the screen edge
 o.undofile = true              -- persistent undo across sessions
 o.mouse = ''                   -- no mouse in nvim; also lets Herdr keep host mouse capture off so Escape isn't swallowed
 
--- SSH 主机没有系统剪贴板工具时，通过终端的 OSC 52 读写本机剪贴板。
+local remote_copy
+
+-- OSC 52 不能通过 Herdr 远程连接读取本机剪贴板，因此只同步 yank。
 if vim.env.SSH_CONNECTION then
+  o.clipboard = ''
+  remote_copy = require('vim.ui.clipboard.osc52').copy('+')
+  if vim.env.TMUX then
+    local command = vim.fn.expand('~/.local/bin/tmux-osc52-copy')
+    remote_copy = function(lines)
+      vim.fn.system(command, lines)
+    end
+  end
+  local no_remote_paste = function() return 0 end
   vim.g.clipboard = {
-    name = 'OSC 52',
-    copy = {
-      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-    },
-    paste = {
-      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-    },
+    name = 'OSC 52 write-only',
+    copy = { ['+'] = remote_copy, ['*'] = remote_copy },
+    paste = { ['+'] = no_remote_paste, ['*'] = no_remote_paste },
   }
 end
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank({ timeout = 200 })
+    if remote_copy and vim.v.event.operator == 'y' then
+      remote_copy(vim.v.event.regcontents)
+    end
   end,
 })
 
