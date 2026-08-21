@@ -3,6 +3,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highl
 -- select all
 vim.keymap.set('n', '<C-a>', 'ggVG', { desc = 'Select All' })
 vim.keymap.set('n', '<leader>n', '<cmd>set number!<CR>', { desc = 'Toggle Line Numbers' })
+vim.keymap.set('n', '<leader><leader>', '<C-^>', { desc = 'Switch to Previous Buffer' })
 -- pasting over a selection no longer clobbers your clipboard
 vim.cmd([[ xnoremap <expr> p 'pgv"'.v:register.'y' ]])
 
