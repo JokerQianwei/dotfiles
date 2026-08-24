@@ -1,0 +1,5 @@
+# 只保留雾凇自然码双拼。
+__patch:
+  - patch/+:
+      schema_list:
+        - schema: double_pinyin

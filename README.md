@@ -9,7 +9,7 @@ This repository started from [kunchenguid/dotfiles](https://github.com/kunchengu
 - macOS defaults for appearance, keyboard repeat, Dock, Finder, window tiling, and trackpad
 - Homebrew formulae, casks, and Mac App Store applications
 - command-line tools, fonts, Zsh, Git, and language runtimes
-- Neovim, tmux, Herdr, VS Code, CotEditor, and selected application preferences
+- Neovim, tmux, Herdr, VS Code, CotEditor, Squirrel, and selected application preferences
 - Karabiner keyboard layers and utility scripts
 - Pi extensions, skills, settings, and shared agent instructions
 
@@ -109,6 +109,7 @@ Only preferences that are useful and safe to publish are tracked.
 
 - Bob, Caffeine, Maccy, and Mos settings are restored with `restore-app-preferences`.
 - Snipaste, GitHub CLI, Herdr, and Karabiner use linked configuration files.
+- Squirrel links the public Rime schema, fuzzy-pinyin, and theme overrides. These overrides expect rime-ice to be installed separately; generated state and personal phrases remain local.
 - `export-logi-options-plus` extracts a reviewed, sanitized Logi Options+ snapshot. It is for inspection and manual recovery because Logi Options+ has no stable public import interface.
 
 Karabiner also maps `Cmd+Option+V` and `Cmd+Shift+V` in Kitty to `pi-paste-image-safe2`. The script uploads a clipboard image through the local SSH alias `safe2`, copies the remote path, and pastes it into Kitty. Host details and credentials stay in the local SSH configuration.
@@ -146,3 +147,7 @@ This is a personal configuration repository. Pull requests and feature requests 
 ## License
 
 MIT No Attribution. See `LICENSE`.
+
+`home/Library/Rime/squirrel.custom.yaml` is derived from
+[rime-squirrel-macos-color-scheme](https://github.com/lonr/rime-squirrel-macos-color-scheme)
+and remains licensed under GPL-3.0-only.

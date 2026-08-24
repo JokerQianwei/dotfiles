@@ -1,0 +1,9 @@
+# 雾凇自然码默认简体，并启用常用模糊音。
+patch:
+  "switches/@2/reset": 0
+  "speller/algebra/@before 3": derive/^([zcs])h/$1/
+  "speller/algebra/@before 4": derive/^([zcs])([^h])/$1h$2/
+  "speller/algebra/@before 5": derive/^n/l/
+  "speller/algebra/@before 6": derive/^l/n/
+  "speller/algebra/@before 7": derive/([aei])ng$/$1n/
+  "speller/algebra/@before 8": derive/([aei])n$/$1ng/

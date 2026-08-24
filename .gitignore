@@ -28,6 +28,8 @@ result-*
 **/.env.local
 **/*.pem
 
+# Rime 私人短语包含个人信息，只保留在本机。
+/home/Library/Rime/custom_phrase_double.txt
 
 # no-mistakes 本地验证状态不得提交到公开仓库
 .no-mistakes/

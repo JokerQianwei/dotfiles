@@ -168,6 +168,18 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/gh/config.yml";
   home.file.".snipaste/config.ini".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.snipaste/config.ini";
+  home.file."Library/Rime/default.custom.yaml" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Rime/default.custom.yaml";
+    force = true;
+  };
+  home.file."Library/Rime/double_pinyin.custom.yaml" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Rime/double_pinyin.custom.yaml";
+    force = true;
+  };
+  home.file."Library/Rime/squirrel.custom.yaml" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/Library/Rime/squirrel.custom.yaml";
+    force = true;
+  };
   home.file.".tmux.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
   home.file."bin/pi-paste-image-safe2".source =
