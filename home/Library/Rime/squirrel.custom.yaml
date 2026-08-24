@@ -2,6 +2,7 @@
 # 来源：https://github.com/lonr/rime-squirrel-macos-color-scheme
 patch:
   show_notifications_when: never
+  status_icon/show: false
   style/color_scheme: mac
   style/color_scheme_dark: mac_dark
   style/candidate_list_layout: stacked
