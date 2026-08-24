@@ -59,7 +59,11 @@
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
+    taps = [
+      "ampcode/tap"
+    ];
     brews = [
+      "ampcode"
       "duti"
       "fish"
       "herdr"
@@ -89,6 +93,7 @@
       "tencent-meeting"
       "updf"
       "uuremote"
+      "vimr"
       "visual-studio-code"
       "wechat"
     ];

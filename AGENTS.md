@@ -6,6 +6,7 @@
 - 不要向这个公开仓库提交 `.no-mistakes/` 验证证据。该目录已被 Git 忽略；如果验证流程将其暂存到分支，合并前必须移除。
 - 除非用户明确要求，否则只在本地提交改动，不要执行 `git push`。
 - 本仓库是公开仓库，禁止提交用户个人信息或是敏感信息。
+- 修改 Karabiner 配置后执行 `touch -h ~/.config/karabiner/karabiner.json` 触发 daemon 重载，并在 `/var/log/karabiner/core_service.log` 确认 `core_configuration is updated`。
 
 ## 维护本文件
 

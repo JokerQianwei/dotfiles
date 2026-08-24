@@ -8,13 +8,8 @@ vim.keymap.set('n', '<leader><leader>', '<C-^>', { desc = 'Switch to Previous Bu
 vim.cmd([[ xnoremap <expr> p 'pgv"'.v:register.'y' ]])
 
 -- 使用主行键跳到行首和行尾。
-vim.keymap.set({ 'n', 'x', 'o' }, 'H', '^', { desc = 'Jump to First Non-blank Character' })
-vim.keymap.set({ 'n', 'x', 'o' }, 'L', '$', { desc = 'Jump to End of Line' })
-
--- 禁用编辑时的方向键，保持使用主行键移动。
-for _, key in ipairs({ '<Up>', '<Down>', '<Left>', '<Right>' }) do
-  vim.keymap.set({ 'n', 'i', 'x' }, key, '<Nop>')
-end
+vim.keymap.set({ 'n', 'x', 'o' }, '<C-h>', '^', { desc = 'Jump to First Non-blank Character' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<C-l>', '$', { desc = 'Jump to End of Line' })
 
 -- 使用易触及的组合键退出当前编辑模式。
 for _, key in ipairs({ '<C-j>', '<C-k>' }) do
