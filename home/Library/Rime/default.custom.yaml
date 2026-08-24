@@ -1,5 +1,8 @@
-# 只保留雾凇自然码双拼。
+# 只保留雾凇自然码双拼，并禁用单按 Shift 切换中英文。
 __patch:
   - patch/+:
       schema_list:
         - schema: double_pinyin
+  - patch:
+      "ascii_composer/switch_key/Shift_L": noop
+      "ascii_composer/switch_key/Shift_R": noop
