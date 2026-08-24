@@ -101,8 +101,7 @@ VS Code settings and pinned extension versions are stored under `home/.config/vs
 install-vscode-extensions
 ```
 
-CotEditor is the default application for common text-file formats. VimR shares
-the tracked Neovim configuration, including its GUI settings in `ginit.vim`.
+CotEditor is the default application for common text-file formats.
 
 ## Application preferences
 

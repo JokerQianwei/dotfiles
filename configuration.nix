@@ -93,7 +93,6 @@
       "tencent-meeting"
       "updf"
       "uuremote"
-      "vimr"
       "visual-studio-code"
       "wechat"
     ];
