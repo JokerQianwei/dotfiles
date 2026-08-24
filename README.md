@@ -114,6 +114,19 @@ Only preferences that are useful and safe to publish are tracked.
 
 Karabiner also maps `Cmd+Option+V` and `Cmd+Shift+V` in Kitty to `pi-paste-image-safe2`. The script uploads a clipboard image through the local SSH alias `safe2`, copies the remote path, and pastes it into Kitty. Host details and credentials stay in the local SSH configuration.
 
+### Squirrel restoration
+
+The repository currently restores only the public Rime overrides. Reproducing the complete input method on a new Mac also requires Squirrel English, rime-ice, and the Apple Chinese-to-English translation model.
+
+The intended automated restore path is:
+
+1. publish and pin a `Squirrel.app` release from [Squirrel English](https://github.com/JokerQianwei/squirrel-english)
+2. let the dotfiles download that release
+3. install rime-ice and deploy the tracked Rime overrides
+4. download the Apple translation model when macOS first requests it
+
+This automation is not implemented yet. Even after it is added, macOS still requires adding “鼠须管” once in System Settings under Keyboard → Text Input.
+
 ## Pi and agent resources
 
 Pi is installed through the `pi-coding-agent` Homebrew formula. Home Manager links only repository-authored or reviewed resources:
