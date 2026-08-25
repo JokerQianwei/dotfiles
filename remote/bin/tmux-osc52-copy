@@ -2,9 +2,13 @@
 set -eu
 
 # tmux 3.4 会消费应用发出的 OSC 52，但不会继续写入外层终端。
-# copy-pipe 不设置 TMUX_PANE，因此由按键绑定显式传入目标面板。
-pane=${1:?}
-session=$(tmux display-message -p -t "$pane" '#{session_name}')
+# copy-pipe 显式传入目标面板；popup 没有面板 ID，改用它所属的客户端。
+pane=${1-}
+if [ -n "$pane" ]; then
+    session=$(tmux display-message -p -t "$pane" '#{session_name}')
+else
+    session=$(tmux display-message -p '#{session_name}')
+fi
 payload=$(base64 | tr -d '\r\n')
 
 tmux list-clients -F '#{client_session}|#{client_tty}' |

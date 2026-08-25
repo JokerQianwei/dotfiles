@@ -20,7 +20,7 @@ if vim.env.SSH_CONNECTION then
   if vim.env.TMUX then
     local command = vim.fn.expand('~/.local/bin/tmux-osc52-copy')
     remote_copy = function(lines)
-      vim.fn.system(command, lines)
+      vim.fn.system({ command, vim.env.TMUX_PANE }, lines)
     end
   end
   local no_remote_paste = function() return 0 end
