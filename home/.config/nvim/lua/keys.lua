@@ -7,6 +7,11 @@ vim.keymap.set('n', '<leader><leader>', '<C-^>', { desc = 'Switch to Previous Bu
 -- pasting over a selection no longer clobbers your clipboard
 vim.cmd([[ xnoremap <expr> p 'pgv"'.v:register.'y' ]])
 
+-- 编辑时使用 hjkl 移动；命令行和终端仍保留方向键。
+for _, key in ipairs({ '<Left>', '<Down>', '<Up>', '<Right>' }) do
+  vim.keymap.set({ 'n', 'i', 'x' }, key, '<Nop>')
+end
+
 -- 使用主行键跳到行首和行尾。
 vim.keymap.set({ 'n', 'x', 'o' }, '<C-h>', '^', { desc = 'Jump to First Non-blank Character' })
 vim.keymap.set({ 'n', 'x', 'o' }, '<C-l>', '$', { desc = 'Jump to End of Line' })
