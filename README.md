@@ -133,6 +133,7 @@ Pi is installed through the `pi-coding-agent` Homebrew formula. Home Manager lin
 
 - `~/.pi/agent/extensions`
 - selected Pi settings and local packages
+- public OpenAI Codex model overrides merged into the local model registry
 - shared skills under `~/.agents/skills` for Pi, Codex, and Claude
 - `home/AGENTS.md` for Pi, Codex, and Claude
 
@@ -140,7 +141,7 @@ The tracked Pi setup includes an edit-tool router, retry handling, fixed third-p
 
 Run `/reload` in Pi after changing extensions, skills, or settings.
 
-The repository does not track Pi authentication, model definitions, MCP credentials, sessions, trust state, caches, or downloaded npm and Git package trees.
+The repository does not track Pi authentication, private model definitions, MCP credentials, sessions, trust state, caches, or downloaded npm and Git package trees.
 
 ## Data intentionally excluded
 

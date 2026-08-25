@@ -219,4 +219,19 @@ in
   home.file.".pi/agent/packages/pi-herdr-btw".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/packages/pi-herdr-btw";
 
+  # 只合并可公开的模型覆盖，保留 models.json 中的本地 provider 配置。
+  home.activation.mergePiModelOverrides = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    models="$HOME/.pi/agent/models.json"
+    overrides="${dotfiles}/home/.pi/agent/openai-codex-model-overrides.json"
+    $DRY_RUN_CMD ${pkgs.coreutils}/bin/mkdir -p "$HOME/.pi/agent"
+    if [ -f "$models" ]; then
+      temp=$(${pkgs.coreutils}/bin/mktemp "$models.XXXXXX")
+      $DRY_RUN_CMD ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$models" "$overrides" > "$temp"
+      $DRY_RUN_CMD ${pkgs.coreutils}/bin/chmod 600 "$temp"
+      $DRY_RUN_CMD ${pkgs.coreutils}/bin/mv "$temp" "$models"
+    else
+      $DRY_RUN_CMD ${pkgs.coreutils}/bin/install -m 600 "$overrides" "$models"
+    fi
+  '';
+
 }
