@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+# 部分 Tinted8 方案缺少可选 UI 色；删除模板产生的空颜色设置。
+theme_file=$1
+sed -i.bak '/^[[:space:]]*[[:alpha:]_][[:alnum:]_]*[[:space:]][[:space:]]*#$/d' "$theme_file"
+rm -f "$theme_file.bak"
+
+if [ -n "${KITTY_PID:-}" ] && kill -USR1 "$KITTY_PID" 2>/dev/null; then
+  exit 0
+fi
+killall -USR1 kitty 2>/dev/null || true

@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+# 从给定根目录中的 Git 仓库创建或切换 tmux session。
+project=$(
+  fd --hidden --type d --max-depth 4 '^\.git$' "$@" 2>/dev/null |
+    sed 's|/\.git/$||' |
+    sort -u |
+    fzf --prompt='project> ' --reverse --border=none
+)
+
+session=$(basename "$project" | tr '.:' '__')
+if ! tmux has-session -t "=$session" 2>/dev/null; then
+  tmux new-session -d -s "$session" -c "$project"
+fi
+tmux switch-client -t "=$session"

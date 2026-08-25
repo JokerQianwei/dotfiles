@@ -1,0 +1,8 @@
+default-scheme = "tinted8-nord"
+
+[[items]]
+path = "https://github.com/tinted-theming/tinted-terminal"
+name = "tinted-terminal"
+themes-dir = "themes/kitty"
+hook = "~/.local/bin/tinty-kitty-hook \"$TINTY_THEME_FILE_PATH\""
+supported-systems = ["base16", "base24", "tinted8"]

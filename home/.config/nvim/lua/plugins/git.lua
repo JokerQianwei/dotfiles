@@ -30,6 +30,8 @@ return {
     'sindrets/diffview.nvim',
     opts = {
       enhanced_diff_hl = true,
+      -- 为树状路径保留足够空间，减少文件名截断。
+      file_panel = { win_config = { width = 50 } },
       hooks = {
         diff_buf_win_enter = function(_, winid, ctx)
           local minus = 'DiffChange:DiffviewMinusLine,DiffText:DiffviewMinusText'

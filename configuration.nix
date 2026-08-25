@@ -61,6 +61,7 @@
     onActivation.extraFlags = [ "--force" ];
     taps = [
       "ampcode/tap"
+      "tinted-theming/tinted"
     ];
     brews = [
       "ampcode"
@@ -70,6 +71,7 @@
       "leetgo"
       "pi-coding-agent"
       "pngpaste"
+      "tinty"
     ];
     casks = [
       "1password"

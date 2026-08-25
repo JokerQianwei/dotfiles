@@ -12,21 +12,32 @@ return {
         vim.api.nvim_set_hl(0, group, { bg = 'none' })
       end
 
-      vim.api.nvim_set_hl(0, 'NormalFloat', { fg = '#D8DEE9', bg = '#2E3440' })
-      vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#4C566A', bg = '#2E3440' })
+      vim.api.nvim_set_hl(0, 'NormalFloat', { fg = '#E5E9F0', bg = '#2E3440' })
+      vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#475165', bg = '#2E3440' })
       vim.api.nvim_set_hl(0, 'FloatTitle', { fg = '#88C0D0', bg = '#2E3440', bold = true })
 
-      -- Git ignored 条目使用低对比度 Nord 灰，避免压过真实改动。
-      vim.api.nvim_set_hl(0, 'OilGitStatusIndexIgnored', { fg = '#4C566A' })
-      vim.api.nvim_set_hl(0, 'OilGitStatusWorkingTreeIgnored', { fg = '#4C566A' })
+      -- Tinted8 Nord 的普通灰用于弱化 Git ignored 条目。
+      vim.api.nvim_set_hl(0, 'OilGitStatusIndexIgnored', { fg = '#616E88' })
+      vim.api.nvim_set_hl(0, 'OilGitStatusWorkingTreeIgnored', { fg = '#616E88' })
 
-      -- 与 delta 当前主题一致；行内强调色由 Diffview 按左右窗口设置。
-      vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#002800' })
-      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#3F0001' })
-      vim.api.nvim_set_hl(0, 'DiffviewPlusLine', { bg = '#002800' })
-      vim.api.nvim_set_hl(0, 'DiffviewPlusText', { bg = '#006000' })
-      vim.api.nvim_set_hl(0, 'DiffviewMinusLine', { bg = '#3F0001' })
-      vim.api.nvim_set_hl(0, 'DiffviewMinusText', { bg = '#901011' })
+      -- Diff 使用 Tinted Gallery 中 Nord 的低对比度行背景。
+      vim.api.nvim_set_hl(0, 'DiffAdd', { fg = '#C2D4B3', bg = '#424A51' })
+      vim.api.nvim_set_hl(0, 'DiffDelete', { fg = '#D18D93', bg = '#46404D' })
+      vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#434C5E' })
+      vim.api.nvim_set_hl(0, 'DiffText', { bg = '#475165', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffviewPlusLine', { fg = '#C2D4B3', bg = '#424A51' })
+      vim.api.nvim_set_hl(0, 'DiffviewPlusText', { fg = '#C2D4B3', bg = '#4C594B', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffviewMinusLine', { fg = '#D18D93', bg = '#46404D' })
+      vim.api.nvim_set_hl(0, 'DiffviewMinusText', { fg = '#D18D93', bg = '#5A434A', bold = true })
+
+      vim.api.nvim_set_hl(0, 'NeogitDiffAdditions', { fg = '#A3BE8C' })
+      vim.api.nvim_set_hl(0, 'NeogitDiffAdd', { fg = '#C2D4B3', bg = '#424A51' })
+      vim.api.nvim_set_hl(0, 'NeogitDiffAddHighlight', { fg = '#A3BE8C', bg = '#424A51' })
+      vim.api.nvim_set_hl(0, 'NeogitDiffAddInline', { fg = '#C2D4B3', bg = '#4C594B', bold = true })
+      vim.api.nvim_set_hl(0, 'NeogitDiffDeletions', { fg = '#BF616A' })
+      vim.api.nvim_set_hl(0, 'NeogitDiffDelete', { fg = '#D18D93', bg = '#46404D' })
+      vim.api.nvim_set_hl(0, 'NeogitDiffDeleteHighlight', { fg = '#BF616A', bg = '#46404D' })
+      vim.api.nvim_set_hl(0, 'NeogitDiffDeleteInline', { fg = '#D18D93', bg = '#5A434A', bold = true })
     end,
   },
 }

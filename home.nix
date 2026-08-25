@@ -156,8 +156,12 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
   home.file.".config/fish/config.fish".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/fish/config.fish";
+  home.file.".config/fish/conf.d/tinted8-nord.fish".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/fish/conf.d/tinted8-nord.fish";
   home.file.".config/kitty/kitty.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/kitty/kitty.conf";
+  home.file.".config/tinted-theming/tinty/config.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/tinted-theming/tinty/config.toml";
   home.file.".config/karabiner/karabiner.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
   home.file.".hammerspoon/init.lua".source =
@@ -184,6 +188,10 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
   home.file."bin/pi-paste-image-safe2".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/pi-paste-image-safe2";
+  home.file.".local/bin/tinty-kitty-hook".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/tinty-kitty-hook";
+  home.file.".local/bin/tmux-sessionizer".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/remote/bin/tmux-sessionizer";
   home.file."bin/install-vscode-extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/install-vscode-extensions";
   home.file."bin/restore-app-preferences".source =
