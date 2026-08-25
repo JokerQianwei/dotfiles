@@ -9,7 +9,7 @@ This repository started from [kunchenguid/dotfiles](https://github.com/kunchengu
 - macOS defaults for appearance, keyboard repeat, Dock, Finder, window tiling, and trackpad
 - Homebrew formulae, casks, and Mac App Store applications
 - command-line tools, fonts, Zsh, Git, and language runtimes
-- Neovim, tmux, Herdr, VS Code, CotEditor, Squirrel, and selected application preferences
+- Neovim, tmux, Herdr, VimR, VS Code, Squirrel, and selected application preferences
 - Karabiner keyboard layers and utility scripts
 - Pi extensions, skills, settings, and shared agent instructions
 
@@ -101,7 +101,7 @@ VS Code settings and pinned extension versions are stored under `home/.config/vs
 install-vscode-extensions
 ```
 
-CotEditor is the default application for common text-file formats.
+VimR is the default application for common text-file formats and uses the tracked Neovim configuration.
 
 ## Application preferences
 

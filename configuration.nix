@@ -78,7 +78,6 @@
       "1password-cli"
       "betterdisplay"
       "codexbar"
-      "coteditor"
       "domzilla-caffeine"
       "font-dejavu"
       "font-jetbrains-mono-nerd-font"
@@ -95,6 +94,7 @@
       "tencent-meeting"
       "updf"
       "uuremote"
+      "vimr"
       "visual-studio-code"
       "wechat"
     ];

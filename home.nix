@@ -144,9 +144,11 @@ in
     do
       for role in viewer editor all
       do
-        /opt/homebrew/bin/duti -s com.coteditor.CotEditor "$type" "$role"
+        /opt/homebrew/bin/duti -s com.qvacua.VimR "$type" "$role"
       done
     done
+    # Launch Services 缓存默认应用，重启用户 daemon 后立即应用关联。
+    /usr/bin/killall lsd 2>/dev/null || true
   '';
 
   # Edit-in-place: the real file stays in my repo, ~/.config just points at it.

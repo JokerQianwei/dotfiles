@@ -480,7 +480,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Caps + E => Open CotEditor",
+                                "description": "Caps + E => Open VimR",
                                 "from": {
                                     "key_code": "e",
                                     "modifiers": {
@@ -495,7 +495,7 @@
                                     {
                                         "software_function": {
                                             "open_application": {
-                                                "file_path": "/Applications/CotEditor.app"
+                                                "file_path": "/Applications/VimR.app"
                                             }
                                         }
                                     }
