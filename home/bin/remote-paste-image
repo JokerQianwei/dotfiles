@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+REMOTE_DIR=".cp-images"
+STATE_DIR="${TMPDIR:-/tmp}/remote-paste-hosts-$UID"
+LOG="$HOME/Library/Logs/remote-paste-image.log"
+SSH_OPTS=(
+  -o BatchMode=yes
+  -o ControlMaster=auto
+  -o ControlPersist=24h
+  -o ControlPath="$HOME/.ssh/cm-%C"
+  -o LogLevel=ERROR
+)
+
+log() { printf '[%s] %s\n' "$(date '+%F %T')" "$*" >> "$LOG"; }
+fail() {
+  log "ERROR: $*"
+  osascript -e "display notification \"$*\" with title \"Paste image\"" >/dev/null 2>&1 || true
+  exit 1
+}
+
+command -v pngpaste >/dev/null 2>&1 || fail "缺少 pngpaste: brew install pngpaste"
+[ -n "${KITTY_LISTEN_ON:-}" ] || fail "Kitty remote control 不可用"
+
+window_json="$(kitten @ ls --match "state:focused" --all-env-vars)" \
+  || fail "无法查询 Kitty 窗口"
+window_id="$(printf '%s' "$window_json" | jq -er 'first(.[].tabs[].windows[]).id')" \
+  || fail "无法确定 Kitty 窗口"
+kitty_pid="$(printf '%s' "$window_json" | jq -er 'first(.[].tabs[].windows[]).env.KITTY_PID')" \
+  || fail "无法确定 Kitty 实例"
+
+state_file="$STATE_DIR/$window_id"
+[ -s "$state_file" ] || fail "当前窗口未登记远程主机，请使用 kssh <host> 连接"
+IFS=$'\t' read -r registered_pid host < "$state_file"
+[ "$registered_pid" = "$kitty_pid" ] || fail "远程主机记录已过期，请重新使用 kssh <host> 连接"
+[ -n "$host" ] || fail "远程主机记录为空"
+
+file="paste-$(date +%Y%m%d-%H%M%S)-$(uuidgen).png"
+tmpdir="$(mktemp -d "${TMPDIR:-/tmp}/remote-paste-image.XXXXXX")"
+local_file="$tmpdir/$file"
+trap 'rm -rf "$tmpdir"' EXIT
+
+pngpaste "$local_file" || fail "剪贴板里没有图片"
+[ -s "$local_file" ] || fail "剪贴板图片为空"
+
+# 文件名只含本机生成的安全字符，图片通过标准输入直接复用 SSH 控制连接。
+# shellcheck disable=SC2029
+remote_path="$(ssh "${SSH_OPTS[@]}" "$host" "mkdir -p ~/$REMOTE_DIR && cat > ~/$REMOTE_DIR/$file && printf '%s' \"\$HOME/$REMOTE_DIR/$file\"" < "$local_file")" \
+  || fail "上传到 $host 失败"
+[ -n "$remote_path" ] || fail "SSH 上传返回空路径"
+
+# 定向写回触发快捷键的窗口，不切换焦点，也不覆盖系统剪贴板。
+printf '%s' "$remote_path" |
+  kitten @ send-text --match "id:$window_id" --stdin
+
+log "OK [$host]: $remote_path"

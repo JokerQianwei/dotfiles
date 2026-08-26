@@ -112,7 +112,7 @@ Only preferences that are useful and safe to publish are tracked.
 - Squirrel links the public Rime schema, fuzzy-pinyin, and theme overrides. These overrides expect rime-ice to be installed separately; generated state and personal phrases remain local.
 - `export-logi-options-plus` extracts a reviewed, sanitized Logi Options+ snapshot. It is for inspection and manual recovery because Logi Options+ has no stable public import interface.
 
-Karabiner also maps `Cmd+Option+V` and `Cmd+Shift+V` in Kitty to `pi-paste-image-safe2`. The script uploads a clipboard image through the local SSH alias `safe2`, copies the remote path, and pastes it into Kitty. Host details and credentials stay in the local SSH configuration.
+Kitty maps `Cmd+Option+V` and `Cmd+Shift+V` to `remote-paste-image`. Connect with `kssh <alias>` so the current Kitty window records its remote host. The script uploads a clipboard image through that SSH alias and writes the remote path back to the same window without replacing the clipboard. Host details and credentials stay in the local SSH configuration.
 
 ### Squirrel restoration
 

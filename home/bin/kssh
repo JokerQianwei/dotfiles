@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+STATE_DIR="${TMPDIR:-/tmp}/remote-paste-hosts-$UID"
+SSH_OPTS=(
+  -o BatchMode=yes
+  -o ControlMaster=auto
+  -o ControlPersist=24h
+  -o ControlPath="$HOME/.ssh/cm-%C"
+  -o LogLevel=ERROR
+)
+
+fail() {
+  printf 'kssh: %s\n' "$*" >&2
+  exit 1
+}
+
+[ "$#" -gt 0 ] || fail "用法: kssh <ssh-host> [ssh-arguments...]"
+[ -n "${KITTY_WINDOW_ID:-}" ] || fail "只能在 Kitty 窗口中使用"
+[ -n "${KITTY_PID:-}" ] || fail "无法确定 Kitty 实例"
+
+host="$1"
+shift
+mkdir -p "$STATE_DIR"
+chmod 700 "$STATE_DIR"
+umask 077
+printf '%s\t%s\n' "$KITTY_PID" "$host" > "$STATE_DIR/$KITTY_WINDOW_ID"
+
+# 提前建立上传专用控制连接，避免第一次粘贴承担 SSH 握手延迟。
+(
+  ssh "${SSH_OPTS[@]}" -O check "$host" >/dev/null 2>&1 ||
+    ssh "${SSH_OPTS[@]}" -MNf "$host" >/dev/null 2>&1
+) &
+
+kitten ssh "$host" "$@"

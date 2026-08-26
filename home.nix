@@ -188,8 +188,10 @@ in
   };
   home.file.".tmux.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.tmux.conf";
-  home.file."bin/pi-paste-image-safe2".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/pi-paste-image-safe2";
+  home.file.".local/bin/kssh".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/kssh";
+  home.file.".local/bin/remote-paste-image".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/remote-paste-image";
   home.file.".local/bin/tinty-kitty-hook".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/bin/tinty-kitty-hook";
   home.file.".local/bin/tmux-sessionizer".source =
