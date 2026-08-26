@@ -23,7 +23,8 @@
     },
     "npm:pi-web-access-lazy@0.1.0",
     "./packages/pi-herdr-btw",
-    "npm:@windust/pi-goal@0.4.1"
+    "npm:@windust/pi-goal@0.4.1",
+    "npm:@qianweiyang/pi-tmux"
   ],
   "extensions": [],
   "enabledModels": [
