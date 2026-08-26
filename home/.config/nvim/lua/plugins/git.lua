@@ -25,6 +25,8 @@ return {
     'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
     keys = { { '<leader>g', function() mark_untracked(); require('neogit').open() end, desc = 'Neogit' } },
+    -- 默认展示最近提交，避免每次进入状态页后手动展开。
+    opts = { sections = { recent = { folded = false } } },
   },
   {
     'sindrets/diffview.nvim',

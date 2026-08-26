@@ -137,7 +137,7 @@ Pi is installed through the `pi-coding-agent` Homebrew formula. Home Manager lin
 - shared skills under `~/.agents/skills` for Pi, Codex, and Claude
 - `home/AGENTS.md` for Pi, Codex, and Claude
 
-The tracked Pi setup includes an edit-tool router, retry handling, fixed third-party package versions, and the local `pi-herdr-btw` package. Third-party packages execute with the current user's permissions; review `home/.pi/agent/settings.json` before enabling or updating them.
+The tracked Pi setup includes an edit-tool router, retry handling, fixed third-party package versions, the local `pi-herdr-btw` package, and the `pi-tmux` package for visible Pi subagents in tmux. Third-party packages execute with the current user's permissions; review `home/.pi/agent/settings.json` before enabling or updating them.
 
 Run `/reload` in Pi after changing extensions, skills, or settings.
 

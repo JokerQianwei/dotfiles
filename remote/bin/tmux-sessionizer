@@ -3,8 +3,8 @@ set -eu
 
 # 从给定根目录中的 Git 仓库创建或切换 tmux session。
 project=$(
-  fd --hidden --type d --max-depth 4 '^\.git$' "$@" 2>/dev/null |
-    sed 's|/\.git/$||' |
+  fd --hidden --type d --type f --max-depth 4 '^\.git$' "$@" 2>/dev/null |
+    sed 's|/\.git/$||; s|/\.git$||' |
     sort -u |
     fzf --prompt='project> ' --reverse --border=none
 )
