@@ -20,15 +20,15 @@ return {
       vim.api.nvim_set_hl(0, 'OilGitStatusIndexIgnored', { fg = '#616E88' })
       vim.api.nvim_set_hl(0, 'OilGitStatusWorkingTreeIgnored', { fg = '#616E88' })
 
-      -- Diff 使用 Tinted Gallery 中 Nord 的低对比度行背景。
-      vim.api.nvim_set_hl(0, 'DiffAdd', { fg = '#C2D4B3', bg = '#424A51' })
-      vim.api.nvim_set_hl(0, 'DiffDelete', { fg = '#D18D93', bg = '#46404D' })
+      -- Diff 只叠加低对比度背景，保留源代码的语法前景色。
+      vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#424A51' })
+      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#46404D' })
       vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#434C5E' })
       vim.api.nvim_set_hl(0, 'DiffText', { bg = '#475165', bold = true })
-      vim.api.nvim_set_hl(0, 'DiffviewPlusLine', { fg = '#C2D4B3', bg = '#424A51' })
-      vim.api.nvim_set_hl(0, 'DiffviewPlusText', { fg = '#C2D4B3', bg = '#4C594B', bold = true })
-      vim.api.nvim_set_hl(0, 'DiffviewMinusLine', { fg = '#D18D93', bg = '#46404D' })
-      vim.api.nvim_set_hl(0, 'DiffviewMinusText', { fg = '#D18D93', bg = '#5A434A', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffviewPlusLine', { bg = '#424A51' })
+      vim.api.nvim_set_hl(0, 'DiffviewPlusText', { bg = '#4C594B', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffviewMinusLine', { bg = '#46404D' })
+      vim.api.nvim_set_hl(0, 'DiffviewMinusText', { bg = '#5A434A', bold = true })
 
       vim.api.nvim_set_hl(0, 'NeogitDiffAdditions', { fg = '#A3BE8C' })
       vim.api.nvim_set_hl(0, 'NeogitDiffAdd', { fg = '#C2D4B3', bg = '#424A51' })
