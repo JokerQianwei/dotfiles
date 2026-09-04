@@ -6,7 +6,7 @@ STATE_DIR="${TMPDIR:-/tmp}/remote-paste-hosts-$UID"
 SSH_OPTS=(
   -o BatchMode=yes
   -o ControlMaster=auto
-  -o ControlPersist=24h
+  -o ControlPersist=10m
   -o ControlPath="$HOME/.ssh/cm-%C"
   -o LogLevel=ERROR
 )

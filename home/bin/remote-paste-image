@@ -8,7 +8,7 @@ LOG="$HOME/Library/Logs/remote-paste-image.log"
 SSH_OPTS=(
   -o BatchMode=yes
   -o ControlMaster=auto
-  -o ControlPersist=24h
+  -o ControlPersist=10m
   -o ControlPath="$HOME/.ssh/cm-%C"
   -o LogLevel=ERROR
 )
