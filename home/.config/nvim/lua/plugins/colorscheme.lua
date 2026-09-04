@@ -29,6 +29,8 @@ return {
       vim.api.nvim_set_hl(0, 'DiffviewPlusText', { bg = '#4C594B', bold = true })
       vim.api.nvim_set_hl(0, 'DiffviewMinusLine', { bg = '#46404D' })
       vim.api.nvim_set_hl(0, 'DiffviewMinusText', { bg = '#5A434A', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffviewFilePanelInsertions', { fg = '#A3BE8C', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffviewFilePanelDeletions', { fg = '#BF616A', bold = true })
 
       vim.api.nvim_set_hl(0, 'NeogitDiffAdditions', { fg = '#A3BE8C' })
       vim.api.nvim_set_hl(0, 'NeogitDiffAdd', { fg = '#C2D4B3', bg = '#424A51' })
